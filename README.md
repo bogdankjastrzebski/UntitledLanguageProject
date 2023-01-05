@@ -8,6 +8,8 @@ TODO:
 
 ## Language Syntax
 
+Something something. 
+
 ## Characteristics
 
 ## Implementation  
