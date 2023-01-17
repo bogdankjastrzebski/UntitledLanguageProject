@@ -31,7 +31,7 @@ let fib(n)
    return b
             
 let show x
-   str = String(x)
+   str: String(x)
    return quote
       println($str, ": ", $x)
 
