@@ -10,6 +10,9 @@ struct Environment
     function Environment(names::Dict{Symbol, Any})
         return new(names, nothing)
     end
+    function Environment(names, outer)
+        return new(names, outer)
+    end
     function Environment(outer, keys, values)
         return new(Dict{Symbol, Any}(zip(keys, values)), outer)
     end
@@ -70,7 +73,7 @@ BUILTINS = Dict{Symbol, Any}(
 
 function create_lambda(ast, env)
     body = ast.expr[3]
-    names = val.(ast.expr[2].expr)
+    names = ast.expr[2] isa Atom ? (ast.expr[2],) : val.(ast.expr[2].expr)
     return (args...) -> ast_walk(
         ast.expr[3], 
         env = Environment(env, names, args)
@@ -99,7 +102,7 @@ function ast_walk(ast::SExpr; env=Environment(BUILTINS))
             @match item begin
                 _::Function => item(ast_walk.(ast.expr[2:end], env=env)...)
                 _::Macro    => ast_walk(item(ast.expr[2:end]...), env=env)
-                _ => error("Error: not callable")
+                _ => error("Error: $item not callable")
             end
         end
     end
