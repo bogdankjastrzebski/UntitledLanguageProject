@@ -36,3 +36,8 @@ let show x
       println($str, ": ", $x)
 
 ```
+
+# Cool Resources
+
+* [tput commands](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x405.html)
+* [tput commands better](https://www.gnu.org/software/termutils/manual/termutils-2.0/html_chapter/tput_1.html)
