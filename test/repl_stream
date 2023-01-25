@@ -1,0 +1,14 @@
+for _ in 0..n
+   a, b: b, a+b
+set! x 1
+
+df: sql
+   select min(col1) from df
+   where col2 < 3
+let fib(n)
+   a: 1
+   b: 0
+   for _ in 0..n
+      a, b: b, a+b
+   return b
+

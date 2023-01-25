@@ -1,5 +1,7 @@
 #!/bin/bash
 
+
+stream_name=$1
 arrow_sign=$(printf "\u1b")
 lines=("")
 line=0
@@ -9,7 +11,7 @@ while true; do
 	if [ "$char" = $'\x7f' ] || [ "$char" = $'\x08' ]; then
 		if [ $position -ne 0 ]; then
 			tput sc
-			
+		
 			second_part="${lines[line]:position}"
 			position=`expr $position - 1`
 			first_part="${lines[line]:0:position}"
@@ -37,10 +39,10 @@ while true; do
 			line=`expr $line - 1`
 			tput cub $position
 			tput cuu1
-
+	
 			for l in "${lines[@]:line}"; do 
 				tput el
-                                echo -n "$l"
+				echo -n "$l"
 				tput cud1
 			done
 			# echo -n $'\r'
@@ -52,16 +54,21 @@ while true; do
 				tput cuf $position
 			fi	
 		fi
-
+	
 	elif [ "$char" = $'\x12' ]; then
-                clear
-                echo "Your command: "
-                echo
-                for l in "${lines[@]}"; do
-                        echo "$l"
-                done
-                echo
-                echo "End of your command."
+       	        # 	clear
+       	        # 	echo "Your command: "
+       	        # 	echo
+       	        # 	for l in "${lines[@]}"; do
+	#			echo "$l"
+       	 #        	done
+       	  #       	echo
+	#	 	echo "End of your command."
+	#		exit
+			
+		for l in "${lines[@]}"; do
+			echo "$l" >> $stream_name
+		done	
 		exit
 
 	elif [ "$char" = $'\n' ]; then
@@ -70,28 +77,27 @@ while true; do
 		first_part="${lines[line]:0:position}"
 		second_part="${lines[line]:position}"
 		lines[line]=$first_part
-		
+			
 		# Move 
 		line=`expr $line + 1`
 		position=0
-		
+			
 		lines=("${lines[@]:0:line}" "$second_part" "${lines[@]:line}")
 		for (( i=`expr $line - 1`; i<"${#lines[@]}"; i++ )); do
-                        echo -n $'\r'
+       	               	echo -n $'\r'
 			tput el 
-                        echo -n "${lines[i]}"
+			echo -n "${lines[i]}"
 			tput cud1 
                 done
 		moveup=`expr "${#lines[@]}" - $line`
 		if [ $moveup -gt 0 ]; then
 			tput cuu $moveup
 		fi
-
 	
 	elif [[ $char == $arrow_sign ]]; then
-                read -rsn2 mode 
-                case $mode in
-                        '[A')
+          	read -rsn2 mode 
+  	        case $mode in
+                  	'[A')
 				if [ $line -gt 0 ]; then
 					line=`expr $line - 1`
 					number_of_chars="${#lines[line]}"
@@ -103,38 +109,44 @@ while true; do
 						tput cub $moveleft
 					fi
 				fi;;
-                        '[B') 
+                      	'[B') 
 				if [ $line -lt `expr "${#lines[@]}" - 1` ]; then
-                                        line=`expr $line + 1`
-                                        number_of_chars="${#lines[line]}"
-                                        position=$(( $position > $number_of_chars ? $number_of_chars : $position ))
+                               		line=`expr $line + 1`
+                                       	number_of_chars="${#lines[line]}"
+                                       	position=$(( $position > $number_of_chars ? $number_of_chars : $position ))
 					tput cud1
-                                        if [ $position -gt 0 ]; then
-                                                tput cuf $position 
-                                        fi
-                                fi;;
-                        '[D')
+                               		if [ $position -gt 0 ]; then
+                                               	tput cuf $position 
+                                       	fi
+                               	fi;;
+			'[D')
 				if [ $position -gt 0 ]; then
 					position=`expr $position - 1`
 					tput cub1
 				fi;;
-                        '[C')
+                       	'[C')
 				if [ $position -lt "${#lines[line]}" ]; then
 					position=`expr $position + 1`
-			        	tput cuf1
+		        		tput cuf1
 				fi;;
-                esac
+               	esac
 		
 	else	
 		tput sc
 		first_part="${lines[line]:0:position}"
 		second_part="${lines[line]:position}"
-                position=`expr $position + 1`
-                lines[line]=$first_part$char$second_part
-                tput el
-                echo -n $'\r'
-                echo -n "${lines[line]}"
+       	 	position=`expr $position + 1`
+       	 	lines[line]=$first_part$char$second_part
+               	tput el
+               	echo -n $'\r'
+               	echo -n "${lines[line]}"
 		tput rc
 		tput cuf1
 	fi
 done
+
+
+set! x 3
+
+for i in 0..n
+   print(3)
