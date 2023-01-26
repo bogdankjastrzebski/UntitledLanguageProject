@@ -12,3 +12,11 @@ let fib(n)
       a, b: b, a+b
    return b
 
+let quicksort(l)
+   f: l[0]
+   l: [e for e in l if e < f]
+   r: [e for e in l in e >= f]
+   return l ++ [f] ++ r
+
+ααα
+
