@@ -1,5 +1,10 @@
 #!/bin/bash
-
+cat ./daisy.txt
+# echo "daisy"
+#echo "⮟"
+echo "⮮daisy"
+#echo "⯆daisy"
+#echo "⮦daisy"
 
 stream_name=$1
 arrow_sign=$(printf "\u1b")

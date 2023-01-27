@@ -20,3 +20,61 @@ let quicksort(l)
 
 ααα
 
+for i in 0..n
+   print(i)
+
+for i in 0..n
+   a, b: b, a+b
+
+for i in 0..n
+   a, b: b, a+b
+
+
+for i in 0..n
+   a, b: b, a+b
+ls something
+
+let fib(n)
+   a: 0
+   b: 1
+   for _ in 0..n
+      a, b: b, a+b
+   return b
+
+
+for i in 0..n
+   a, b: b, a+b
+
+for i in 0..n
+   a, b: b, a+b
+for i in 0..n
+   a, b: b, a+b
+
+
+for i in 0..n
+   a, b: b, a+b
+
+
+let fib(n)
+   a, b: 1, 0
+   for _ in 0..n
+      a, b: b, a+b
+   return b
+
+print(map(fib)(0..10))
+
+
+
+
+
+
+
+let foo(x, y)
+   return x + y
+
+print( map(foo(y=1))(0..n) )
+print( foo(y=1) | map(x=0..n) )
+
+
+
+
