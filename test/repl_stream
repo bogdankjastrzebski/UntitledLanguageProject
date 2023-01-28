@@ -78,3 +78,54 @@ print( foo(y=1) | map(x=0..n) )
 
 
 
+hello, is it me you are looking for?
+
+
+let foo(x,y)
+   return x + y
+
+curry(foo, y=3))
+foo(y=3)
+
+map(partial(foo)(y=3))(0..n)
+
+
+
+
+let foo(x,y)
+   return x + y
+
+foo.partial(y=1).map([1,2,3])
+
+let partial(kwargs...)
+   return lambda(func) (lambda(b...) func(b..., a...))
+
+foo.part(y=1).map([1,2,3])
+
+bar: foo.part(y=1)
+
+bar..([1,2,3])
+
+bar.map([1,2,3])
+map(bar)([1,2,3])
+
+
+
+
+
+
+let foo(x,y)
+   return x + y
+
+foo.part(y=3).map([1,2,3])
+
+
+
+   __                        
+  / _| __ _ _ __   ___ _   _ 
+ | |_ / _` | '_ \ / __| | | |
+ |  _| (_| | | | | (__| |_| |
+ |_|  \__,_|_| |_|\___|\__, |
+                       |___/
+
+
