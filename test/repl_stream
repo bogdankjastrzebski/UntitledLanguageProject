@@ -129,3 +129,17 @@ foo.part(y=3).map([1,2,3])
                        |___/
 
 
+
+let fib(n)
+   a: 1
+   b: 0
+   for _ in 0..n
+      a, b: b, a+b
+   return b
+
+let bar(x, y)
+   return x + y
+
+bar.part(y=1).map([1,2,3])
+
+
