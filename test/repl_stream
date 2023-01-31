@@ -162,3 +162,6 @@ bar.part(y=1).map([1,2,3])
 for _ in 0..n
    a, b: b, a+b
 
+for _ in 0..n
+   print(3)
+
