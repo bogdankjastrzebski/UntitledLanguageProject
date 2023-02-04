@@ -20,9 +20,11 @@ NC='\033[0m' # No Color
 
 #!/bin/bash
 # cat ./jaskier.txt
-cat "daisy3.txt" | while IFS= read -r line; do
-	echo -e "$line"
-done
+
+#cat "daisy3.txt" | while IFS= read -r line; do
+#	echo -e "$line"
+#done
+
 # echo "daisy"
 #echo "⮟"
 # echo "⮮daisy"

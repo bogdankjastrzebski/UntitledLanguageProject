@@ -1,135 +1,11 @@
-for _ in 0..n
-   a, b: b, a+b
-set! x 1
+print(3)
 
-df: sql
-   select min(col1) from df
-   where col2 < 3
-let fib(n)
-   a: 1
-   b: 0
-   for _ in 0..n
-      a, b: b, a+b
-   return b
+print(5)
 
-let quicksort(l)
-   f: l[0]
-   l: [e for e in l if e < f]
-   r: [e for e in l in e >= f]
-   return l ++ [f] ++ r
-
-ααα
+exit()
 
 for i in 0..n
    print(i)
-
-for i in 0..n
-   a, b: b, a+b
-
-for i in 0..n
-   a, b: b, a+b
-
-
-for i in 0..n
-   a, b: b, a+b
-ls something
-
-let fib(n)
-   a: 0
-   b: 1
-   for _ in 0..n
-      a, b: b, a+b
-   return b
-
-
-for i in 0..n
-   a, b: b, a+b
-
-for i in 0..n
-   a, b: b, a+b
-for i in 0..n
-   a, b: b, a+b
-
-
-for i in 0..n
-   a, b: b, a+b
-
-
-let fib(n)
-   a, b: 1, 0
-   for _ in 0..n
-      a, b: b, a+b
-   return b
-
-print(map(fib)(0..10))
-
-
-
-
-
-
-
-let foo(x, y)
-   return x + y
-
-print( map(foo(y=1))(0..n) )
-print( foo(y=1) | map(x=0..n) )
-
-
-
-
-hello, is it me you are looking for?
-
-
-let foo(x,y)
-   return x + y
-
-curry(foo, y=3))
-foo(y=3)
-
-map(partial(foo)(y=3))(0..n)
-
-
-
-
-let foo(x,y)
-   return x + y
-
-foo.partial(y=1).map([1,2,3])
-
-let partial(kwargs...)
-   return lambda(func) (lambda(b...) func(b..., a...))
-
-foo.part(y=1).map([1,2,3])
-
-bar: foo.part(y=1)
-
-bar..([1,2,3])
-
-bar.map([1,2,3])
-map(bar)([1,2,3])
-
-
-
-
-
-
-let foo(x,y)
-   return x + y
-
-foo.part(y=3).map([1,2,3])
-
-
-
-   __                        
-  / _| __ _ _ __   ___ _   _ 
- | |_ / _` | '_ \ / __| | | |
- |  _| (_| | | | | (__| |_| |
- |_|  \__,_|_| |_|\___|\__, |
-                       |___/
-
-
-
 let fib(n)
    a: 1
    b: 0
@@ -137,31 +13,8 @@ let fib(n)
       a, b: b, a+b
    return b
 
-let bar(x, y)
-   return x + y
+exit()
 
-bar.part(y=1).map([1,2,3])
-
-
-
- |\W/|
-|-(_)E| 
- |/M\| 
-   
-
-
-
- /\V/\
-|>(O)<|
- \/M\/  _
-    \ //
-     |
-     |
-
-
-for _ in 0..n
-   a, b: b, a+b
-
-for _ in 0..n
-   print(3)
+exit()
+exit()
 
