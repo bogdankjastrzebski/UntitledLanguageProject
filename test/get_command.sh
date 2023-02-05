@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Black        0;30     Dark Gray     1;30
 # Red          0;31     Light Red     1;31
 # Green        0;32     Light Green   1;32
@@ -17,8 +19,6 @@ YELLOW='\033[1;33m'
 WHITE='\033[1;37m'
 NC='\033[0m' # No Color
 
-
-#!/bin/bash
 # cat ./jaskier.txt
 
 #cat "daisy3.txt" | while IFS= read -r line; do
@@ -28,7 +28,7 @@ NC='\033[0m' # No Color
 # echo "daisy"
 #echo "⮟"
 # echo "⮮daisy"
-echo -e "${GREEN}⮮daisy${NC}"
+echo -e "\n${GREEN}⮮daisy${NC}"
 #echo "⯆daisy"
 #echo "⮦daisy"
 

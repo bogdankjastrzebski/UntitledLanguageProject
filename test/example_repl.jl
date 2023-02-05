@@ -1,5 +1,7 @@
 
 function read_eval_print_loop()
+	run(`/bin/bash "./print_logo.sh"`)	
+	# run(`/bin/bash "cat "daisy2.txt" | while IFS= read -r line; do echo -e '$line'; done"`)
 	f = open("repl_stream", "r")
 	read(f, String) 
 	while true

@@ -18,3 +18,32 @@ exit()
 exit()
 exit()
 
+for _ in 0..n
+    a, b: b, a+b
+
+let fib(n)
+   a: 1
+   b: 0
+   for _ in 0..n
+      a, b: b, a+b
+   return b
+
+exit()
+
+a: 0
+exit()
+
+b c d
+for i in 0..n
+   a, b: b, a+b
+
+exit()
+for i in 0..n
+   print(i)
+
+exit()
+
+for i in 0..n
+    print(i)
+
+exit()
