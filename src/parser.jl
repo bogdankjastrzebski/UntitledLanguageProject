@@ -23,7 +23,8 @@ CALLS = [
 
 function to_line_tokens(str)
     lines = split(str, '\n')
-    return collect(zip((x -> x isa Nothing ? 1 : x).(findfirst.(!=(' '), lines)), split.(lines)))
+    # return collect(zip((x -> x isa Nothing ? 1 : x).(findfirst.(!=(' '), lines)), split.(lines)))
+    return [(-1, ["begin"]), [e for e in collect(zip(findfirst.(!=(' '), lines), split.(lines))) if !(e[1] isa Nothing)]...]
 end
 
 function get_brackets!(line)

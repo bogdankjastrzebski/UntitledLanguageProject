@@ -47,3 +47,47 @@ for i in 0..n
     print(i)
 
 exit()
+for i in 0..n
+    print i 
+
+exit()
+
+set! x 3
+print x
+
+print x
+
+set! y 4
+
+print add(x, y)
+
+exit()
+
+set! a 3
+set! b 2 
+print add(a,b)
+exit()
+print 3
+
+print 3
+print 3
+
+exit()
+
+print 3
+
+exit()
+
+print 3
+print 33
+
+
+exit()
+print 3 
+print 3
+print 3
+set! a 3
+set! b 4
+
+print add(a,b)
+exit()
