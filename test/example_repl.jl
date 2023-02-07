@@ -81,8 +81,11 @@ function read_eval_print_loop()
 		end
 		
 		println()
-		ast_walk(to_SExpr(parser(command)),env=env)
-
+		try
+			ast_walk(to_SExpr(parser(command)),env=env)
+		catch e
+			println(e)
+		end
 		# println("-----------------")
 		# print(command)
 		# println("#################")

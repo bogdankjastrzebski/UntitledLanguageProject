@@ -91,3 +91,17 @@ set! b 4
 
 print add(a,b)
 exit()
+set! x 1
+
+set! y 2
+print add(x, y)
+print(add(x,y))
+
+print(3)
+set! x 3
+set! y 4
+print add(x,y)
+exit()
+for _ in 0..n
+   print(i)
+

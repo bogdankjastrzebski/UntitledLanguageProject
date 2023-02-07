@@ -37,6 +37,28 @@ let show x
 
 ```
 
+The syntax does not use the meaning of keywords. Quoted code is being parsed "as it is":
+
+```julia
+
+quote 
+   aaa
+   foo
+      bar 
+
+# translates to:
+# (( __nl__ aaa) ( __nl__ foo ( __nl__ bar))
+
+```
+
+Each syntax rule translates to a unique structure, and the translation process is invertible.
+
+```
+foo(x) # translates to ( __call__ foo x)
+foo.bar # translates to ( __dot__ foo bar)
+foo.bar(x) # translates to ( __call__ ( __dot__ foo bar) x) # from left to right
+```
+
 # Cool Resources
 
 * [tput commands](https://tldp.org/HOWTO/Bash-Prompt-HOWTO/x405.html)
