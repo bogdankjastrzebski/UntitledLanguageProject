@@ -122,7 +122,26 @@ while compiled function, due to constant folding does this:
 ```julia
 add_int_int(mul_int_int(x, 2), 3)
 ```
- 
+
+# Functional Programming
+
+The language is not primarily functional, however, functions are useful abstraction for mathematics.
+We have:
+* first class functions
+* no side effects for functions
+
+However, the functions can be analysed e.g. we can exctract functions from composition $f \circ g$ etc.
+Functions are with math in mind, taking gradients etc. not necessarily for functional programming style.
+
+## Mathy stuff
+
+Gradients are derivatives. A derivative is a function, that returns something for an argument. Instread of
+pullback functions, we rather create abstract gradient value, that can be multiplied with other things and
+pullback is a multiplication for this type.
+
+For instance, mapping one function on a vector has a diagonal jacobian. We do not want to create a full matrix
+jacobian, but we do not want pullback either. So we return a diagonal matrix. And the diagonal matrix is 
+smaller than a full matrix, and also multiplying matrix by it is optimised.
 
 # Cool Resources
 
