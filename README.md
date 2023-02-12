@@ -123,6 +123,10 @@ while compiled function, due to constant folding does this:
 add_int_int(mul_int_int(x, 2), 3)
 ```
 
+# Specialization
+
+The programmer is responsible for what he want to compile. The compilation does specialization always and based on all compile-time constants and assumptions. We already know, that the programmer defines compile-time constants with the let keyword.
+
 # Functional Programming
 
 The language is not primarily functional, however, functions are useful abstraction for mathematics.
@@ -142,6 +146,7 @@ pullback is a multiplication for this type.
 For instance, mapping one function on a vector has a diagonal jacobian. We do not want to create a full matrix
 jacobian, but we do not want pullback either. So we return a diagonal matrix. And the diagonal matrix is 
 smaller than a full matrix, and also multiplying matrix by it is optimised.
+
 
 # Cool Resources
 
