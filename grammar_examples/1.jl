@@ -45,25 +45,21 @@ complex: begin
 	func: lambda(f, a, n) a if n ≤ 1 else a*f(f, a, b)
 	return func(func, 1, 10)
 
+let meth(x::I32, y::F32)
 
 
+let snake_case(x::Int32, y::Int32)
+	return x + y
 
-	
-	
+GLOBAL: 3.14
 
+let (var)func
+	return var + 1
 
-
-
-
-
-
-
-
+print((var)(func . func))
 
 
 # Evaluates to (__nl__ quot __colon__ (__nl__ quote (__nl__ something) (__nl__ something)))
 #            = (set! quot (quote (something) (something)))
-
-
 
 
