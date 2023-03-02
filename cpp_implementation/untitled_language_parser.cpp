@@ -1,9 +1,17 @@
 #include<iostream>
-#include<string>
+#include<cstring>
+
+static int gettok() {
+	
+}
+
+static int getindent() {
+	
+}
 
 int main() {
-	std::string a = "asdf\nadff";
-	std::cout << a << std::endl;  
+	std::string str = "foo\nbar";
+	std::cout << str << std::endl;  
 	
 }
 
