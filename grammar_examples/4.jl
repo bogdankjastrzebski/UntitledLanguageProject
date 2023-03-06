@@ -44,3 +44,13 @@ J: forward(w, b, _)'(x) # this one? looks cool
 
 
 
+
+
+
+
+
+
+
+
+
+
