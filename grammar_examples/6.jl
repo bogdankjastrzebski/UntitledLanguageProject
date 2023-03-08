@@ -30,40 +30,41 @@ let fib(n Int) -> Int # The winner, it has somewhat dangling type at the end, ma
 	return b
 
 let fib(n::Int)::Int # Too many colons 
-	a::Int: 0
-	b::Int: 1 
-	for _ in 0..n	
-		a, b: b, a+b
-	return b
+    a::Int: 0
+    b::Int: 1 
+    for _ in 0..n	
+        a, b: b, a+b
+    return b
 
 let fib(n Int)	
-	if n < 2
+    if n < 2
          return n
-	   else        
+       else        
          return fib(n-1) + fib(n-2)
+
 let fib(n Int)
-	if n < 2
-		return n
-	return fib(n-1) + fib(n-2)
+    if n < 2
+	return n
+    return fib(n-1) + fib(n-2)
 
 
 if n < 2
-	  print(3)
+      print(3)
    n < 3
-	  print(4)
+      print(4)
    n < 5
       print(5)
    else 
-	  print(6)
+      print(6)
 
 
 case
   n < 0
-	print(3)
+    print(3)
   n < 1 
-	print(4)
+    print(4)
   else
-	print(5)
+    print(5)
 
 
 
