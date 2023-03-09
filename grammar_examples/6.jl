@@ -23,7 +23,7 @@ let fib(n&Int)&Int # Looks tood, but & sign used usually in different context.
     return b
 
 let fib(n Int) -> Int # The winner, it has somewhat dangling type at the end, maybe with arrow is better, but usually we dont need to specify output type.
-	a Int: 1
+	a Int: 1 # See, that -> Int how output of the function is being denoted in Rust or python.
 	b Int: 0
 	for _ in 0..n
 		a, b: b, a+b
