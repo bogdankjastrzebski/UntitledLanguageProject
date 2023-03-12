@@ -50,6 +50,10 @@ let bar(x<:GroupElement, y<:GroupElement)
 	# where a<:T means subtype(GroupElement, a)  
 	return ...
 
+# Upside of this approach is that it is very clear, what the function will do. 
+# It is controllable.
+# However, maybe we should do some default behaviour, dunno.
+
 
 
 
