@@ -1,15 +1,10 @@
 #include<iostream>
 
 class BSTNode {
-
 	int value; 
 	BSTNode *gt; 
 	BSTNode *lt;
-
 public:
-	BSTNode(int value) {
-		this->value = value;
-	}
 	void insert(int value) {
 		if (this->value < value) {
 			if (this->gt) {
@@ -24,6 +19,9 @@ public:
 				this->lt = new BSTNode(value); 
 			}
 		}
+	}
+	BSTNode(int value) {
+		this->value = value;
 	}
 	BSTNode** find(int value) {
 		if (this->value < value)
@@ -52,7 +50,7 @@ public:
 
 		if (node->gt) {
 			auto repl_node = node->gt->find_min();
-			auto repl_value = repl_node->value;
+		auto repl_value = repl_node->value;
 			std::cout << "repl_value " << repl_value << std::endl;
 			if (auto repl_node_gt = repl_node->gt) {
 				repl_node->value = repl_node_gt->value; 
@@ -106,8 +104,8 @@ int main() {
 	if (bst->find(1)) 
 		std::cout << "1 in bst" << std::endl;
 	if (bst->find(4))
- 		std::cout << "4 in bst" << std::endl;
+		std::cout << "4 in bst" << std::endl;
 	
-	std::cout << "Done" << std::endl; 
-}
+	std::cout << "Done" << std::endl;
 
+}
