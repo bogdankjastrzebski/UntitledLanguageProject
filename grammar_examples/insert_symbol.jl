@@ -22,10 +22,13 @@ magic_a : S"a" # symbol a
 vec : sql select $magic_a from df
 # The above is equivalent to: 
 vec : sql select a from df
-# Notice, that this is usually not possible.
-
 # But only because the main macro strategy says so,
 # in general the language does not have that feature.
+
+
+
+
+
 
 
 
