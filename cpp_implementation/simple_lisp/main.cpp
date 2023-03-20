@@ -46,7 +46,16 @@ public:
 	LispObject(LispLambda value)  : type(Lambda), value(&value) {};
 	LispObject(LispError value)   : type(Error),  value(&value) {}; 	
 		
-	LispType get_type() { return this->type; };			
+	LispType get_type() { return this->type; };		
+	LispCons as_cons() {
+		return *(LispCons *)this->value;
+	}
+	LispLambda as_lambda() {
+		return *(LispLambda *)this->value; 
+	}
+	LispError as_error() {
+		return *(LispError *)this->value;
+	}	
 };
 
 class LispEnvironment {
@@ -77,9 +86,9 @@ LispObject eval(LispObject &code, LispEnvironment &env) {
 	switch code.get_type() { 
 		case Cons: 
 			auto value = code.as_cons(); 
-			auto rator = eval(cons.head, env); 
-			auto rands = eval(cons.tail, env); 	
-		    
+			auto rator = eval(cons.head, env).as_lambda(); 
+			auto rands = eval(cons.tail, env).as_cons(); 	
+						    
 			break; 
 		case Symbol:
 			auto value = code.as_symbol();
