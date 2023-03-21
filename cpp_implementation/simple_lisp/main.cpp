@@ -12,50 +12,95 @@ enum LispType {
 	Error 	
 };
 
-enum ErrorTypes {
+enum ErrorTypes { // These are compiler errors. 
 	IncorrectTypeError,	
-}
-
-struct LispCons {
-	LispObject *head; 
-	LispCons *tail; 
 };
 
-struct LispLambda {
-	LispObject* args;  
-	LispObject* code;	
-};
-
-struct LispError {
-	LispObject* message;	
-};
+// Primitive Lisp Types
 
 struct LispSymbol {
 	std::string symbol;
 };
 
+struct LispCons { 
+	LispObject *head; 
+	LispObject *tail; 
+};
+
+struct LispInt {
+	int value;	
+};
+
+struct LispFloat {
+	float value; 
+};
+
+struct LispString {
+	std::string value; 
+};
+
+struct LispLambda {
+	LispObject *args; 
+	LispObject *code;	
+};
+
+struct LispError {
+	std::string message;	
+};
+
+// Lisp Objects
+
 class LispObject {
-	LispType type; 	
-	void *value;
+	LispType type; // Type Identifier 	
+	void *value;   // Primitive Type
 	
 public:
-	LispObject(int value)         : type(Int),    value(&value) {}; 
-	LispObject(float value)       : type(Float),  value(&value) {}; 
-	LispObject(std::string value) : type(String), value(&value) {}; 
-	LispObject(LispCons value)    : type(Cons),   value(&value) {}; 
-	LispObject(LispLambda value)  : type(Lambda), value(&value) {};
-	LispObject(LispError value)   : type(Error),  value(&value) {}; 	
+	LispObject(         int value ) : type(   Int), value(&value) {}; 
+	LispObject(       float value ) : type( Float), value(&value) {}; 
+	LispObject( std::string value ) : type(String), value(&value) {}; 
+	LispObject(    LispCons value ) : type(  Cons), value(&value) {}; 
+	LispObject(  LispLambda value ) : type(Lambda), value(&value) {};
+	LispObject(   LispError value ) : type( Error), value(&value) {}; 	
 		
 	LispType get_type() { return this->type; };		
-	LispCons as_cons() {
-		return *(LispCons *)this->value;
+
+	int* as_int() {
+		if (this->type != Int) {
+			throw IncorrectTypeError;
+		return (int *)this->value;
 	}
-	LispLambda as_lambda() {
-		return *(LispLambda *)this->value; 
+		
+	float* as_float() {
+		if (this->type != Float)
+			throw IncorrectTypeError; 
+		return (float *)this->value;
 	}
-	LispError as_error() {
-		return *(LispError *)this->value;
+	
+	std::string* as_string() {
+		if (this->type != String)
+			throw IncorrectTypeError; 
+		return (std::string *)this->value;
+	}
+
+	LispCons* as_cons() {
+		if (this->type != Cons)
+			throw IncorrectTypeError;
+		return (LispCons *)this->value;
+	}
+
+	LispLambda* as_lambda() {
+		if (this->type != Lambda)
+			throw IncorrectTypeError;
+		return (LispLambda *)this->value; 
+	}
+
+	LispError* as_error() {
+		if (this->type != Error)
+			throw IncorrectTypeError;
+		return (LispError *)this->value;
 	}	
+
+	
 };
 
 class LispEnvironment {
@@ -82,24 +127,33 @@ public:
 };
 
 
-LispObject eval(LispObject &code, LispEnvironment &env) {
+/* enum LispType {
+	Symbol,
+	Cons, 
+	Int, 
+	Float,
+	String,
+	Lambda,
+	Error 	
+}; */
+
+LispObject* eval(LispObject* code, LispEnvironment* env) {
 	switch code.get_type() { 
+		case Int: 
+			auto value = code->as_int();
+ 
 		case Cons: 
-			auto value = code.as_cons(); 
-			auto rator = eval(cons.head, env).as_lambda(); 
-			auto rands = eval(cons.tail, env).as_cons(); 	
-						    
+			auto value = code->as_cons(); 
+			auto rator = eval(cons->head, env)->as_lambda();
+			auto rands = eval(cons->tail, env)->as_cons(); 	
+									    
 			break; 
 		case Symbol:
-			auto value = code.as_symbol();
-			return env.get_value(value);
+			auto value = code->as_symbol();
+			return env->get_value(value);
 		default: 
 			break;	
 	}
 }
-
-
-
-
 
 
