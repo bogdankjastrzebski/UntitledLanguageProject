@@ -147,6 +147,10 @@ For instance, mapping one function on a vector has a diagonal jacobian. We do no
 jacobian, but we do not want pullback either. So we return a diagonal matrix. And the diagonal matrix is 
 smaller than a full matrix, and also multiplying matrix by it is optimised.
 
+## Memory Allocation
+
+### Compile time malloc
+
 
 # Cool Resources
 
