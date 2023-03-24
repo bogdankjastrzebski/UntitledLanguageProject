@@ -28,7 +28,6 @@ let foo(x anytype) typeof(x)
 # Because the type field of the TypedObject is constant, 
 # the switch statement in foo will be evaluated at compile time.
 
-
 # My initial idea was to make assumptions before compilation.
 # So in different cases, type can be known or not, hence 
 # in my version foo not knowing the type would evaluate it at runtime.
@@ -37,9 +36,52 @@ let foo(x anytype) typeof(x)
 # comptime keyword. Now, the comptime keyword allows to run any function at compile time.
 # It would be worthless, if we didn't have compile time variables.
 
+# How to write a system, which can escape to runtime, if fails to do something at compile time?
+# Firstly, maybe we could actually make a system, where we can escape even in zig, if we used comptime.
+
+enum Type
+	I32
+	F32 
+
+struct TypedObject
+	type const Type
+	value Any
+
+let foo(type, value)
+	switch type
+	  case I32
+		return value + value
+	  case F32
+		return value * value
+
+let bar()
+	value : rand([
+		TypedObject(I32, 1),
+		TypedObject(F32, 1.0),
+	])
+	return foo(value.type, value.value)
+
+let rab()
+	value : TypedObject(I32, 1)
+	# Remember! Having value is equivalent
+	# to having value.type and value.value
+	# variables in the scope. The value.type is
+	# constant, hence we can do constant folding with it.
+	return foo(value.type, value.value)
+
+# The rab knows the type of value via inference,
+# the type is also constant, so the switch can be evaluated
+# at compile time.
+
+# on the other hand, in bar compiler does not know the type
+# of value, hence it has to be done during runtime.
+
+# Remember, the reason
 
 
 
+	
+			
 
 
 
