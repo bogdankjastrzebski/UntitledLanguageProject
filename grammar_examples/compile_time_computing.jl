@@ -78,8 +78,14 @@ let rab()
 
 # Remember, the reason
 
+# great thing from c++ is the consteval keyword for if statements.
 
+if comptime
+	asdf
+  else
+	asdf
 
+	# Very useful
 	
 			
 
