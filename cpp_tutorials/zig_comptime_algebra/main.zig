@@ -1,37 +1,67 @@
 
 const std = @import("std"); 
 
-const Node = union {
+const NodeTag = enum {
+	leaf, 
+	combine,	
+};
+
+const Node = union (NodeTag) {
 	leaf: Leaf, 
-	combine: Combine
-}
+	combine: Combine,
+	fn value(self: Node) i32 {
+		switch (self) {
+			NodeTag.leaf    => |l| return l.int, 
+			NodeTag.combine => |c| return c.lhs.value() + c.rhs.value(),
+		} 
+	}
+};
 
 const Leaf = struct {
-	int: i32;
+	int: i32,
 };
 
 const Combine = struct {
-	lhs: Leaf; 
-	rhs: Leaf;
+	lhs: *Node, 
+	rhs: *Node,
 };
 
-fn leaf(i: i32) Leaf {
+fn node(n: anytype) Node {
+	switch (@TypeOf(n)) {
+		Leaf    => return Node{    .leaf = n },
+		Combine => return Node{ .combine = n },
+		else => unreachable, 
+	}
+}
+
+fn leaf(int: i32) Leaf {
 	return Leaf {
 		.int = int,
-	}
+	};
 }
 
-fn combine(lhs: Node, rhs: Node) Combine {
+fn combine(lhs: *Node, rhs: *Node) Combine {	
 	return Combine {
 		.lhs = lhs,
-		.rhs = rhs
-	}
+		.rhs = rhs,
+	};
 }
 
+fn val(v: anytype) Node {
+	return node(leaf(v));
+}
+
+fn add(lhs: anytype, rhs: anytype) Node {
+	return node(combine(lhs, rhs)); 
+} 
+
 pub fn main() !void {
-	var a = leaf(9);
-	var b = leaf(3);
-	var c = combine(a, b);		
+	comptime var a = val(999999);
+	comptime var b = val(333333);
+	comptime var c = add(&a, &b);
+	comptime var v = c.value();
+	// std.debug.print("{d}\n", .{c.value()});	
+	std.debug.print("{d}\n", .{v});
 }
 
 
