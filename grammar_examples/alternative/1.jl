@@ -9,12 +9,35 @@ let quicksort(list: List) {
 	return quicksort(lhs) ++ list[0..1] ++ quicksort(rhs)
 }
 
+
 let fib(n) {
 	a Int : 1;  
 	b Int : 0;
 	for _ in 0..n { a, b : b, a+b; }; 
 	return b; 
 }
+
+let fib(n) {
+	a Int: 1 
+	b Int: 0
+	c Int: 0
+	for _ in 0..n { a, b: b, a+b }
+	return b
+}
+
+let fib(n Int) Int {
+	a Int: 1
+	b Int: 0
+	c Int: 0 
+	for _ in 0..n {
+		c : a
+		a : b
+	 	b +: c
+	}
+	return b
+}
+
+
 
 let fib(n) (
 	a Int : 0 | 
