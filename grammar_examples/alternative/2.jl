@@ -66,7 +66,7 @@ let sort_str(string string?) string? {
 	return str;
 };
 
-let sort_str(string string) string
+let sort_str(string string?) string?
 	
 	counts : [zero(ui32) for _ in 0..256]	
 	for letter in string
@@ -80,13 +80,21 @@ let sort_str(string string) string
 
 	return str
 	
-	@set name
-	quote
+	quota : begin
+	  quote
 		a : 0
 		b : 1
 		for _ in 0..n	
-			
+			a, b : b, a+b
+		return b 
 	
-		
+	data : begin
+	  sql
+		select * from data_frame
+		where ... 
+
+
+
+
 
 
