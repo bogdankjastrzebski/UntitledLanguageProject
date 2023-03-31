@@ -151,6 +151,10 @@ smaller than a full matrix, and also multiplying matrix by it is optimised.
 
 ### Compile time malloc
 
+# TODO
+
+* type theory 
+
 
 # Cool Resources
 
