@@ -216,7 +216,11 @@ let bar(df @data_frame) @string
 	return cat(data)
 
 
-
+let fib(x i32) i32
+	a, b : 0, 1
+	for _ in 0..n 
+		a, b : b, a+b
+	return b	
 
 
  
