@@ -6,15 +6,13 @@
 # * t2(f(a)) 
 # Then we have a type theory.
 
-string?(x) = true if x isa String else False
+string?(x) : true if x isa String else False
 
 let foo(x string?) string?
 	return ... 
 
 # That means, that we should be able to prove, that
 # if the entry is a string, the output is a string.
-
-
 
 
 
