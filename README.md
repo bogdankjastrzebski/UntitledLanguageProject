@@ -171,7 +171,60 @@ The pragmatic problem is as follows:
 How to decide, what to do at compile time, and what at inference?
 Maybe the programmer should decide. How we could do that?
 
+```julia
+foo : i32? -> i32? 
+	  f32? -> f32?
+foo(x) = x + x
 
+bar(x) = y : str?(x) -> str?(y) and length(y)=2*length(x)
+bar(x) = x + x
+```
+
+Above we introduce simple scheme, where for a function definition, 
+we also say, what it should be always able to prove.
+
+For instance, not knowing what is the length of bar(bar(x)), we
+simply compute $2*2*len(x)$, and we have the answer.
+We explicitly ask it to keep track of the information about something's length.
+
+This scheme aligns with type theory, where we want to be able to prove
+output type from the input type. We, however, want more. We want to keep track of
+different things than just a type. 
+
+# 3rd version
+
+There is also an idea, to let it precompute everything it can.
+The compiler can destroy structs, to keep track only of the 
+things, that change with the input.
+
+```julia
+let add_str_str(x, y)
+	ret : (char*)malloc(sizeof(char) * (x.length + y.length))
+	strcpy!(ret, x.value)
+	strcpy!(ret + x.length, y.value)
+	return str{ret, x.length + y.length}
+
+let add(x, y)
+	if x isa str and y isa str
+		return add_str_str(x, y)		
+	else
+		...
+
+let foo(x)
+	return x + x
+
+# str is a struct { char* value; int length }
+
+foo(str{ NA, 10 }) -> str{NA, 10} + str{NA, 10} -> {
+	ret : (char*)malloc(sizeof(char) * 20)
+	strcpy!(ret, NA)
+	strcpy!(ret + 10, NA)
+	return str{ret, 20}	
+} -> str{ {ret : ... ; strcpy! ... ; ...; return ret} , 20}  
+
+
+
+```
 
 
 
