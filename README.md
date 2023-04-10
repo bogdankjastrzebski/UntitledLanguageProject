@@ -1,6 +1,8 @@
 # UntitledLanguageProject
 The official repository for the untitled language project.
 
+
+
 TODO:
 * language syntax
 * language characteristics
@@ -13,7 +15,7 @@ It is both compiled and interpreted. It is an interpreter, that via macros and c
 generation can translate itself to LLVM, compile functions and later use. Because of
 that, we will be able to compile the interpreter itself. 
 
-Compile time "constants" are being assigned with the `let` keyword. During compilation, 
+Compile time "constants" are being assigned with the `let` keyword. During compilation, α
 they are assumed to be what they are. They are being inlined and assumed as constant. Yet, 
 in fact they can change, which triggers recompilation.
 
@@ -154,6 +156,23 @@ smaller than a full matrix, and also multiplying matrix by it is optimised.
 # TODO
 
 * type theory 
+
+# 2nd Version
+
+Types are useful for at laest two reasons:
+* we know what to do, based on type; 
+* we can optimise code, based on type;
+
+More generally,
+based on compile time knowledge, we can 
+precompute things.
+
+The pragmatic problem is as follows: 
+How to decide, what to do at compile time, and what at inference?
+Maybe the programmer should decide. How we could do that?
+
+
+
 
 
 # Cool Resources
