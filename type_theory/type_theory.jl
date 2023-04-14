@@ -17,9 +17,39 @@ let foo(x string?) string?
 
 
 
+let length(x str) i32
+	if a isa object
+		something
+	  else 
+		something else
 
+let fib(n) {
+	a = 1
+	b = 0
+	while n > 0 {
+		a, b = b, a+b
+		n -= 1
+	}	
+	return b
+}
 
+let fib(n)
+	a = 1
+	b = 0 
+	while n > 0
+		a, b = b, a+b
+		n -= 1
+	return b
 
+{ a = 1; b = 0; while n > 0 { a, b = b, a+b; n-=1 }; return b }
+
+let fib(n i32) i32
+	a : 1
+	b :	0	
+	while n > 0
+		a, b = b, a + b
+		n -= 1 
+	return b
 
 
 
