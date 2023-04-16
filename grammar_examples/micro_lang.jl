@@ -1,0 +1,49 @@
+
+"""
+Simplified language, for starters.
+
+# Grammar:
+* indentation
+	* indents create new block
+* brackets
+	* brackets are matched,
+	* inside a bracket we have a list of symbols
+* symbols
+
+Since symbols can be analysed as strings, we can implement the following:
+* dot syntax: asdf.asdf
+* math syntax: 2*asfd+3
+
+It is not recommended though, to use this syntax.
+
+"""
+
+let fib(n i32) i32
+	set! a 1
+	set! b 0
+	set! c 0
+	while isless?(0, n)
+		set! c a
+		set! a b
+		set! b a	
+		sub! n 1
+	return b
+
+Analysis:
+* the literal one: 1, is a compile time symbol.
+* through type analysis and optimization, a becomes
+  an i32, to match b and return type i32. c is of type a.
+* we could use either lisp syntax (foo arg) or foo(arg) for
+  function syntax.
+
+
+
+
+
+
+
+
+
+
+
+
