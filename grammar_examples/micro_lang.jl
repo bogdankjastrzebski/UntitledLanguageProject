@@ -36,10 +36,26 @@ Analysis:
 * we could use either lisp syntax (foo arg) or foo(arg) for
   function syntax.
 
+So, there are two things in the language:
+* symbols, including: 
+	* characters: asdf
+	* special symbols: *+:. 
+	* strings:  " asfd a" is being read as one symbol.
+	* combination thereof: *alpha.s"asdf asdf" 
+* constructs, i.e., indents and language structure.
 
+Alternative syntax:
 
-
-
+let (fib n)
+	set! a 1
+	set! b 0
+	set! c 0
+	while (isless? 0 n)
+		set! c a 
+		set! a b
+		set! b c 
+		sub! n 1 
+	return b
 
 
 
