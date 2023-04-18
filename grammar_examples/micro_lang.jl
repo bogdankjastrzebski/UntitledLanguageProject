@@ -57,9 +57,23 @@ let (fib n)
 		sub! n 1 
 	return b
 
+The syntax is enough to show the point. 
 
+# Language
 
+Consider transformation:
+	((λf.ffn) (λf.λx. x < 2 ? x : x * (ff(x-1))))
+	(λf.λx.x<2?x:x*(ff(x-1)))(λf.λx.x<2?x:*x(f(x-1)))n
+	(λx.x<2?x:x*((((λf.λx.x<2?x:*x(f(x-1))))λf.λx.x<2?x:*x(f(x-1)))(x-1)))n
 
+We end up with a function of n. We cannot evaluate it. Hence, we stop.
+Though, the first steps get executed. The rule is, everything that can be executed,
+is being executed:
 
+(λx. ...) creates a function.
+(f x) evaluates function iff:
+* f is a known function
+	* perhaps with unknown values inside a definition.
+* and x is known. 
 
 
