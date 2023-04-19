@@ -76,4 +76,20 @@ is being executed:
 	* perhaps with unknown values inside a definition.
 * and x is known. 
 
+Do we want ever, to express the output in terms of the input?
+	(λx.x<2?x:x*((((λf.λx.x<2?x:*x(f(x-1))))λf.λx.x<2?x:*x(f(x-1)))(x-1)))n
+	n<2?n:n*((((λf.λx.x<2?x:*x(f(x-1))))λf.λx.x<2?x:*x(f(x-1)))(n-1))
+
+It hardly does anything, we cannot evaluate it further, as it is infinite.
+
+The question is, will the result always be the a function of unknown parameters?
+The answer is probably not.
+
+
+
+
+
+
+
+
 
