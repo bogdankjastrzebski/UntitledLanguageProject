@@ -85,8 +85,9 @@ It hardly does anything, we cannot evaluate it further, as it is infinite.
 The question is, will the result always be the a function of unknown parameters?
 The answer is probably not.
 
-
-
+The answer is:
+(λx.n)
+is obviously not a function of unknown n, but has uncertainty in it.
 
 
 
