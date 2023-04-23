@@ -44,6 +44,10 @@ Above, we can:
 """
 	
 
+The destroyable objects should work through standard optimization.
+The optimization of memory should be a part of general optimization of
+unused or compile-time used variables.
+
 
 
 
