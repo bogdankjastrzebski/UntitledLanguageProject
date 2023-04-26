@@ -89,6 +89,16 @@ The answer is:
 (λx.n)
 is obviously not a function of unknown n, but has uncertainty in it.
 
+An easy version would be to: 
+(known known) -> reduce
+(unknown known) -> don't reduce
+(known unknown) -> don't reduce
+(unknown unknown) -> don't reduce
+
+where known means that it is not a "final" symbol.
+
+
+
 
 
 
