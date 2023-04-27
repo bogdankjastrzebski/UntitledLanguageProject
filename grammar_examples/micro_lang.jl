@@ -97,7 +97,10 @@ An easy version would be to:
 
 where known means that it is not a "final" symbol.
 
-
+How to implement it?
+The simplest way would be to define an object type, that when called,
+returns unknown expression and if it is being called by a function, then again
+it should return an unknown expression.
 
 
 
