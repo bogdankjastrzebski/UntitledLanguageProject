@@ -102,6 +102,8 @@ The simplest way would be to define an object type, that when called,
 returns unknown expression and if it is being called by a function, then again
 it should return an unknown expression.
 
+What is an unknown expression? It is either an unknown name, or a function call,
+that at this point cannot be evaluated. 
 
 
 
