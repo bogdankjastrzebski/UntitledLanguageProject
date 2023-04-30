@@ -29,8 +29,15 @@ function (fun::MaybeKnown)(arg::MaybeKnown)
 	return CallCons(fun, arg)		
 end
 
+# Example 
+a = Value(3)
+b = Value(4)
+c = Value(:c)
+add = Value(x -> Value(y -> Value(x + y)))
 
+add(a)(b)
 
+add(c)(b)
 
 
 
