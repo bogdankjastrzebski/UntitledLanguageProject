@@ -39,6 +39,17 @@ add(a)(b)
 
 add(c)(b)
 
+# Example 2 
+
+k = Value(2)
+v = Value(:v)
+f = Value(x -> add(x)(v)) # error! 
+f = add(v)
+
+f(v)
+
+f(k)
+
 
 
 
