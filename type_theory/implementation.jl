@@ -24,7 +24,7 @@ end
 
 function (fun::MaybeKnown)(arg::MaybeKnown)
 	if is_known(fun) && is_known(arg)
-		return fun.value(arg.value) 
+		return Value(fun.value(arg.value)) 
 	end
 	return CallCons(fun, arg)		
 end
@@ -33,7 +33,7 @@ end
 a = Value(3)
 b = Value(4)
 c = Value(:c)
-add = Value(x -> Value(y -> Value(x + y)))
+add = Value(x -> y -> x + y)
 
 add(a)(b)
 
@@ -50,7 +50,7 @@ f(v)
 
 f(k)
 
-
+f = Value(x -> add(x)(v).value)
 
 
 # function (fun::CallCons)(arg)
