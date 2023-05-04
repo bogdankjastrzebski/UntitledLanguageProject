@@ -19,8 +19,21 @@ dict : {
 
 dict[ind] 
 dict.get(key, default)
+dict.get(key)
 dict.nth(ind) # ordered!
 # it is ordered in order to be able to discover the order in which elements has been added, for instance. 
 
+Lists:
+
+list : []
+list : [1,2,3]
+list[ind]
+list.get(ind)
+list.nth(ind)
+list[0..]
+list[0..2..]
+list[1..2..]
+list[1..-1]
+list.slice(a, b, step=2)
 
 
