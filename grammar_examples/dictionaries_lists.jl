@@ -36,4 +36,15 @@ list[1..2..]
 list[1..-1]
 list.slice(a, b, step=2)
 
+# List, moveover, is a swiss knife implementation of a list.
+# It can easily store eveything etc.
+# The proper arrays are initilised differently.
+# They can store only specified type, and have constant size.
+
+arr : Array[1,2,3,4] -> Array{i32, 1}(length=4)
+
+
+
+
+
 
