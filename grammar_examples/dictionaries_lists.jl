@@ -43,6 +43,21 @@ list.slice(a, b, step=2)
 
 arr : Array[1,2,3,4] -> Array{i32, 1}(length=4)
 
+# Overall, we want the lists, sets and dictionaries to be c"compile time values" 
+# So, in case when a field is typed, we coerce this into a value of a given type
+
+arr Array : [1,2,3,4] 
+assert arr == Array[1,2,3,4]
+
+
+
+
+
+
+
+
+
+
 
 
 
