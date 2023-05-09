@@ -40,10 +40,25 @@ let fib(n)
     return b
 
 # The first grammar is cleaner, but the second one is simpler.
+# The first is saying, that the variable has type, while the second,
+# that the value has type. We want the second.
 
+# Maybe there should be a default?
+let fib(n)
+    a : 1 # i32
+    b : 0l # i64
+    for _ in 0..n
+        a, b: b, a+b
+    return b
 
+# This solution is not general enough.
 
-
+let fib(n)
+    a : i32 0
+    b : i32 0
+    for _ in 0..n
+        a, b <- b, a+b
+    return b
 
 
 
