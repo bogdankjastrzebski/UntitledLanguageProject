@@ -45,3 +45,12 @@ let fib(n)
     return b
 
 
+The question is, what should be the semantics for: 
+* formal language
+* informal language
+And how similar they should be.
+
+
+
+
+
