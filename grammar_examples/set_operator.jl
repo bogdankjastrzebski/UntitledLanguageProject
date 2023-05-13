@@ -50,7 +50,7 @@ The question is, what should be the semantics for:
 * informal language
 And how similar they should be.
 
-
-
+IMO they should have similar semantics.
+But maybe different, than julia.
 
 
