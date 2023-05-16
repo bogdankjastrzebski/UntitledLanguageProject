@@ -54,3 +54,27 @@ IMO they should have similar semantics.
 But maybe different, than julia.
 
 
+There are two possible styles, depending on who we want to appeal to.
+We want to appeal to python users, because at worst we can just wrap
+existing c libraries and call it a day, gain users and then people who
+actually can write code will follow.
+
+Hardcore programmers will not switch from rust or c++ or c.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
