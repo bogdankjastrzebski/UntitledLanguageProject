@@ -61,7 +61,35 @@ actually can write code will follow.
 
 Hardcore programmers will not switch from rust or c++ or c.
 
+Maybe we should do it like this
+exact grammar:
 
+let fib(n i32) i32
+    a i32: 1
+    b i32: 0
+    t i32: 0
+    while n > 0
+        t <- a
+        a <- b
+        b +<- t
+        n -<- 1
+    return b
+
+<- is a set in place operator.
+.= in julia is also two letters.
+
+this:
+
+let fib(n T) T
+    a: 1
+    b: 0
+    for _ in 0..n
+        a, b : b, a+b
+    return b
+
+Will be optimized to the upper version, where we do things in place. 
+Here : always mean "set to new value", but through code analysis we know,
+that we will be able to optimise it.
 
 
 
