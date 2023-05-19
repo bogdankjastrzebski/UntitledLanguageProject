@@ -81,8 +81,8 @@ let fib(n i32) i32
 this:
 
 let fib(n T) T
-    a: 1
-    b: 0
+    a : 1
+    b : 0
     for _ in 0..n
         a, b : b, a+b
     return b
@@ -93,7 +93,8 @@ that we will be able to optimise it.
 
 
 
-
+For sure, there should be correspondence with typed code, and without.
+So, how to do it?
 
 
 
