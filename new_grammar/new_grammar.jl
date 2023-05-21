@@ -152,6 +152,10 @@ func := (
 #         return b   
 # Maybe not              
 
+q := (quote
+          func := (lambda (n, func) 1 if n < 1 else n * func(n-1))
+          factorial := (lambda (n) func(n, func)))
+                                                                            
 #### Broadcasting
 # operations are not broadcasted by default.
 # math operation are
