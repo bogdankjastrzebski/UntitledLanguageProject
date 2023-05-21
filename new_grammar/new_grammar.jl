@@ -62,27 +62,111 @@ if a < 1
 
 #### Type Naming
 
-using type names should be limited to minimum
+# using type names should be limited to minimum
+
+There are two types of "types": 
+* abstract types;
+* machine types;
+
+We almost never use machine types,
+because we want our code to be abstract: 
+
+let fib(n: Additive)
+    a := one(n)  # a: typeof(n) = 1
+    b := zero(n) # b: typeof(n) = 0
+    for _ in 0..n
+        a, b = b, a + b
+    return b
+
+This creates:
+- if does not exist:
+
+__fib := dict()
+fib := lambda(args...) __fib[typeof.map(args)](args...) # If does not already exist
+
+- then:
+__fib[(S"Additive",)] := lambda(n) ...
 
 
+# Macros
+let swap a b
+    ... 
+
+swap a b
+something asdf
+    ...
 
 
+## One line macros:
+func := (lambda (n) ...)
+
+## Two Line macros
+func := (lambda (n)
+              a := one(n)
+              b := zero(n)
+              for _ in 0..n
+                  a, b = b, a + b
+              return b) # This one looks to the compiler like:
+# lambda (n)
+#               a := one(n)
+#               b := zero(n)
+#               for _ in 0..n
+#                   a, b = b, a + b
+#               return b   
+#
+# Which actually parses to the same thing. (since we are only comparing indents)
 
 
+func := (lambda (n)
+    a := one(n)
+    b := zero(n)
+    for _ in 0..n
+        a, b = b, a + b
+    return b)
 
+              
+func := (
+lambda (n)
+    a := one(n)
+    b := zero(n)
+    for _ in 0..n
+        a, b = b, a + b
+    return b   
+)             
+              
+              
+func := (
+    lambda (n)
+        a := one(n)
+        b := zero(n)
+        for _ in 0..n
+            a, b = b, a + b
+        return b   
+) # This will parse maybe to:
+# <newblock>
+#     lambda (n)
+#         a := one(n)
+#         b := zero(n)
+#         for _ in 0..n
+#             a, b = b, a + b
+#         return b   
+# Maybe not              
 
+#### Broadcasting
+# operations are not broadcasted by default.
+# math operation are
+a + a # works normally 
+a - a # works normally 
+a * a # * denotes comutative multiplication, thus elementwise.
+a ⋅ a # matmul (not broadcasted, however if shape(a) = (batchsize, n, n)... it may be)
+a / a # denotes elementwise division
+a \ a # is broadcasted, but like ⋅ 
+# a \ a = a^-1 ⋅ a,   (a' \ a')' = (a'^-1 ⋅ a')' = a ⋅ a^-1
 
+# Other functions we broadcast with .map
+foo.map([...])
 
-
-
-
-
-
-
-
-
-
-
-
+:= is not broadcasted.
+Should = change pointer or content with broadcasting?
 
 
