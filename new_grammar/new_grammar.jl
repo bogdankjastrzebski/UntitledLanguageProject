@@ -169,4 +169,12 @@ foo.map([...])
 := is not broadcasted.
 Should = change pointer or content with broadcasting?
 
+# Function types:
+
+f: Real -> Real = (lambda(x) x^2)
+g: Real -> Real -> Real = (lambda (x) (lambda (y) x + y))
+
+
+
+
 
