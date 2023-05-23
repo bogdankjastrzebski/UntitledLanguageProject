@@ -179,6 +179,18 @@ f: Real -> Real = (lambda(x) x^2)
 g: Real -> Real -> Real = (lambda (x) (lambda (y) x + y))
 
 
+f(x) := x + x
+f(x) : R -> R = x + x
+
+let foo(x : Real) : Real
+    return x + x
+
+typeof(foo) == Real -> Real
+
+f: Natural -> Natural = x -> x+x
+
+
+
 
 
 
