@@ -189,8 +189,31 @@ typeof(foo) == Real -> Real
 
 f: Natural -> Natural = x -> x+x
 
+# How to understand function types?
+# the function type is solely it's name written in an odd way.
+let foo(x: Real)
+    ...
+
+let foo(x: Int)
+    ...
+
+# creates something like
+foo_Real(x) = ...
+foo_Int(x) = ...
+
+# and the language has implemented dispatch function:
+
+let foo(x)
+    switch typeof(x)
+      Real
+        return foo_Real(x)
+      Int
+        return foo_Int(x)
 
 
+
+
+# Implementation Example
 
 
 
