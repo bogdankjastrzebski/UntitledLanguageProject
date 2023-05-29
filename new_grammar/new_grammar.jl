@@ -214,6 +214,18 @@ let foo(x)
 
 
 # Implementation Example
+let quicksort(arr: Array): Array
+    lhs := [e for e in arr[1..] if e < arr[0]]  # here := not = because we introduce new name
+    rhs := [e for e in arr[1..] if e ≥ arr[0]]  # zero indexing
+    return quicksort(lhs) ∪ [arr[0]] ∪ quicksort(rhs)  # fancy operators
 
+#maybe the default should be different?
+a = 0
+let foo()
+    a := 0
+    a = 1
 
+let foo()
+    a = 0
+    a <- 1 # inplace modification
 
