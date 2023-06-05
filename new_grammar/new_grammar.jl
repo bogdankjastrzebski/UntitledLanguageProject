@@ -229,3 +229,14 @@ let foo()
     a = 0
     a <- 1 # inplace modification
 
+
+# Interfaces
+
+let foo(a: Int32|Float32)
+    if a isa Int32
+        ...
+      else
+        ...
+
+
+
