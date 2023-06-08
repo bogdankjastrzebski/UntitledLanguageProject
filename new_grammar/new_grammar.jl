@@ -239,4 +239,13 @@ let foo(a: Int32|Float32)
         ...
 
 
+struct mystruct
+    id: i32
+    name: str
+
+
+
+
+
+
 
