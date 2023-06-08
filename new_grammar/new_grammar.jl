@@ -229,3 +229,24 @@ let foo()
     a = 0
     a <- 1 # inplace modification
 
+
+# List Comprehension
+
+b: Array[Int] = [i for i in 0..n if i % 2 == 0]
+
+# Predicates
+
+equals?(a, b)
+lessthan?(a, b)
+morethan?(a, b)
+pred?(a, b, c, ...)
+
+
+
+
+
+
+
+
+
+
