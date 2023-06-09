@@ -249,4 +249,13 @@ pred?(a, b, c, ...)
 
 
 
+struct mystruct
+    id: i32
+    name: str
+
+
+
+
+
+
 
