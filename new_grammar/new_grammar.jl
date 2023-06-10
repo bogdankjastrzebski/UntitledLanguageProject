@@ -264,3 +264,74 @@ let fib(n: T): T where T <: Integer
     return b
 
 
+
+# How to make dispatch
+
+Programmable dispatch:
+
+
+# Functions as trees?
+
+struct PredLeaf
+    impl: Procedure
+
+struct PredBranch
+    predicate: Function
+    true: PredicateTree
+    false: PredicateTree
+
+struct PredicateTree = PredLeaf | PredBranch
+
+
+let foo_int(x)
+    show f"x: i32 = {x}"
+
+
+let foo_float(x)
+    show f"x: f32 = {x}"
+
+
+let foo_str(x)
+    show f"x: str = {x}"
+
+
+dispatch_foo: PredicateTree = \
+    PredBranch(
+        is_numeric?,
+        PredBranch(
+            is_int?,
+            PredLeaf(foo_int),
+            PredLeaf(foo_float),
+        ),
+        PredLeaf(foo_string),
+   )
+# Domain specific language:
+dispatch_foo: PredicateTree = @pred_tree
+    if is_numeric?
+        if is_int?
+            foo_int
+          else
+            foo_float
+      else
+        foo_str
+
+
+let foo(x)
+    return dispatch_foo(x)
+
+# And now, it works as expected.
+# How to add a method?
+
+let foo_tuple(x)
+    show f"x: tuple = ({", ".join(x)})"
+
+
+dispatch_foo.false = PredBranch(is_tuple?, PredLeaf(foo_tuple), dispatch.false)
+# Alternative with domain syntax:
+dispatch_foo.false = @pred_tree
+    foo_tuple if is_tuple? else dispatch.false
+
+
+
+
+
