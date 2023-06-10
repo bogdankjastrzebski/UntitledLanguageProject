@@ -242,20 +242,25 @@ morethan?(a, b)
 pred?(a, b, c, ...)
 
 
+a: Int < 3 
 
+a :+= 3  # a := a + 3  /  let a a + 3
+a +:= 3  # ....        /  
+a += 3   # a = a + 3   /  add-inplace! a 3
 
+a: Array[Int] = [1,2,3]
+a := Array[Int](3,4,5)
 
-
-
-
-
-struct mystruct
-    id: i32
-    name: str
-
-
-
-
-
+let fib(n: T): T where T <: Integer
+    a, b, c: T
+    a = 1
+    b = 0
+    c = 0
+    while n > 0 
+        c = a
+        a = b
+        b += c
+        n -= 1
+    return b
 
 
