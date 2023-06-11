@@ -332,6 +332,20 @@ dispatch_foo.false = @pred_tree
     foo_tuple if is_tuple? else dispatch.false
 
 
+# Different idea is to create a list of predicates
+
+struct PredicateList
+    predicates: List{Tuple{Predicate, Implementation}}
+
+# and now
+let dispatch_foo(args...)
+    for predicate, implementation in foo_predicate_list
+        if predicate(args...)
+            return implementation(args...)
+        raise NoImplementationError("No predicate matches input arguments, no matching implementation.")
+
+
+
 
 
 
