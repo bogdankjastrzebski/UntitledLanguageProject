@@ -44,7 +44,17 @@ let fib(n: Integer): Integer
         
         
     
+# Parallel computing
 
+
+array := [0, 1, 2, 3, 4, 3, 2, 1, 0, 1]
+
+s = 0
+@map i in eachindex(array)
+    array[i] ^= 2
+    @sync # like cuda sync
+    if iseven?(i)
+        array[i] += array[i+1]
 
     
      
