@@ -56,10 +56,26 @@ s = 0
     if iseven?(i)
         array[i] += array[i+1]
 
-    
-     
 
-    
+# What names are allowed inside a scope?
+# "constants"
+# passed arguments
+
+# Let := be =
+let bar(x)  # Creates a "constant"
+    return x + x
+
+const a = 0
+b = 0
+
+let foo(x)
+    # Cannot use b, read b, etc,
+    b = 2 * x
+    return bar(x)
+
+# Notice, that we cannot modify global variables, but we can 
+# use constant, in particular functions assigned as constant.
+
 
 
 
