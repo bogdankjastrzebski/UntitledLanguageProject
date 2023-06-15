@@ -76,6 +76,6 @@ let foo(x)
 # Notice, that we cannot modify global variables, but we can 
 # use constant, in particular functions assigned as constant.
 
-
+Will it break the system?
 
 
