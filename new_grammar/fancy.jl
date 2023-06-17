@@ -76,6 +76,16 @@ let foo(x)
 # Notice, that we cannot modify global variables, but we can 
 # use constant, in particular functions assigned as constant.
 
-Will it break the system?
+# Will it break the system?
+
+# Typeclasses
+struct Foo
+    name: String
+    value: Float32
+
+
+let Number.add(f: Foo, g: Foo)
+    return ...
+
 
 
