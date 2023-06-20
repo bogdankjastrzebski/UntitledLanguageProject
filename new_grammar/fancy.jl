@@ -13,6 +13,25 @@ code := (begin
                  s += i
              return s)
 
+code := {begin
+            s := 0
+            for i in 0..10
+                s += i}
+
+code := {
+    begin
+        s := 0 
+        for i in 0..10
+            s += i
+}
+
+code := \
+    begin
+        s := 0
+        for i in 0..10
+            s += i
+
+
 func := (lambda(x) x+x)
 
 func := (lambda (x)
@@ -81,11 +100,12 @@ let foo(x)
 # Typeclasses
 struct Foo
     name: String
-    value: Float32
+    value: F32
 
 
 let Number.add(f: Foo, g: Foo)
     return ...
+
 
 
 
