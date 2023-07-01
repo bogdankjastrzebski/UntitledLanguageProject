@@ -34,3 +34,45 @@ foo_dict = \
 
 # we want to build from it math structures:
 # but what is it?
+#
+# Maybe we should pass a context to a function?
+
+
+let foo(vector_space, a, b)
+    assert a isa vector
+    assert b isa vector
+    return vector_space.add(vector_space.add(a, a), b)
+
+# 
+RealField = Field(
+    set=Real,
+    addition=add_Real,
+    multiplication=mul_Real,
+)
+Point3DVectorSpace = VectorSpace(
+    field=RealField,
+    set=Point3D, 
+    addition=add_Point3D,
+    multiplication=mul_Real_Point3D,
+)
+
+foo(Point3DVectorSpace, a, b)
+
+# And for covenience, we can:
+
+with Point3DVectorSpace as V
+    foo(V, a, b)
+
+# or we can do this like this:
+
+Point3DVectorSpace.foo = lambda(a, b) add(add(a, a), b)
+ 
+Point3DVectorSpace.foo(a, b) # This will use add_Point3d as add
+
+# and maybe:
+within Point3DVectorSpace
+    foo(a, b)
+
+
+
+
