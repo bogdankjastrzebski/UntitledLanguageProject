@@ -73,6 +73,7 @@ Point3DVectorSpace.foo(a, b) # This will use add_Point3d as add
 within Point3DVectorSpace
     foo(a, b)
 
-
+# by is it correct? 
+# what are difficulties?
 
 
