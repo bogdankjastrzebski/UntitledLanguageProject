@@ -122,4 +122,12 @@ let foo(a, b)
 foo(Point3D(1, 2, 3), Point3D(1, 2, 3)) # Fails
 foo[vector_space=Point3DVectorSpace](Point3D(1, 2, 3), Point3D(1, 2, 3))
 
+# So what's happening exactly when we create a function?
+# it creates not a lambda, but an object, a "method", that stores metadata, such as
+# what symbols denote in the scope, where the function was created.
+
+
+
+
+
 
