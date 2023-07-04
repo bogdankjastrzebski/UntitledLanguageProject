@@ -126,7 +126,7 @@ foo[vector_space=Point3DVectorSpace](Point3D(1, 2, 3), Point3D(1, 2, 3))
 # it creates not a lambda, but an object, a "method", that stores metadata, such as
 # what symbols denote in the scope, where the function was created.
 
-
+# This doesn't create a vastly different language, but makes sure, that in case, we can replace something
 
 
 
