@@ -77,3 +77,49 @@ within Point3DVectorSpace
 # what are difficulties?
 
 
+# Funny idea:
+# make all variables invisible from outside:
+
+let linear(math, w, b, x)
+    return math.add(math.b, math.mul(w, b))
+
+let nn(space, ws, bs, x)
+    for w, b in ws, bs
+        x = space.linear(space.math, w, b, x)
+    return x
+
+# Then we are always able to replace them as we like.
+
+# Another, more serious idea:
+# Make a list of functions called and constants used by a function, such that we will be able to replace them:
+
+let grr(x)
+    return bar(add(mul(2, x), 1))
+
+print(grr.namespace)
+# foo:
+#   *recursive call
+#   bar
+#   add
+#   mul
+#   2
+#   1
+
+grr[mul=my_mul](x)
+
+
+# Our vector space:
+let foo(a, b)
+    return add(add(a, a), b)
+
+foo[add=my_add](a, b)
+
+# or
+del vector_space # no vector space in scope
+let foo(a, b)
+    return vector_space.add(vector_space.add(a, a), b)
+
+foo(Point3D(1, 2, 3), Point3D(1, 2, 3)) # Fails
+foo[vector_space=Point3DVectorSpace](Point3D(1, 2, 3), Point3D(1, 2, 3))
+
+
