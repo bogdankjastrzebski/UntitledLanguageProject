@@ -128,6 +128,29 @@ foo[vector_space=Point3DVectorSpace](Point3D(1, 2, 3), Point3D(1, 2, 3))
 
 # This doesn't create a vastly different language, but makes sure, that in case, we can replace something
 
+# Advantages are:
+# * simple
+# * very similar to a python
+# * allows always to change the code, without designing it to do so.
 
+
+# Examples:
+
+let bar(x)
+  within vector_space
+    return ...
+
+# we can also do it a bit differently
+# we could provide all namespace at once...
+
+let bar(x)
+    return ...
+
+bar[namespace](asdf)
+
+# How should we denote it?
+
+foo(x, y, vector_space=Point3DVectorSpace) # general, allows for multiple things inserted.
+# it is better, because it doesn't make sense to return method with fitted namespace.
 
 
