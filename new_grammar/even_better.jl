@@ -149,8 +149,40 @@ let bar(x)
 bar[namespace](asdf)
 
 # How should we denote it?
-
-foo(x, y, vector_space=Point3DVectorSpace) # general, allows for multiple things inserted.
+vs = Point3DVectorSpace
+foo(x, y, vector_space=vs) # general, allows for multiple things inserted.
 # it is better, because it doesn't make sense to return method with fitted namespace.
+# this also makes sense, as functions should be compiled with respect to types of input variables, 
+# and this shows, that any name used inside a function is a type.
 
+# Unfortunately we end up passing our vector space all over the place.
+# Though, we should point out, that in this case the vector space is always required, so it can be moved to regular params:
+foo(vs, x, y)
+# and then we use the "...,vector_space=vs)" notation only when someone didn't think of using the param.
+# and foo(vs, x, y) is short.
 
+let fib(field, n)
+    a = one(field)
+    b = zero(field)
+    for _ in range(field, n)
+        a, b = b, add(field, a, b)
+    return b
+
+# or
+let fib(field, n)
+    a = field.one()
+    b = field.zero()
+    for _ in field.range(n)
+        a, b = b, field.add(a, b)
+    return b
+
+# or
+let fib(field, n)
+  within field
+    a = 1
+    b = 0
+    for _ in range(n)
+        a, b = b, add(a, b) # or a + b
+    return b
+
+ 
