@@ -27,4 +27,28 @@ The default functions work as follows:
         arg = eval(:(bar))
         foo_inner(arg)
  
- 
+
+# no macros!
+# only code, that returns code!
+
+
+(lambda x y) -> Lambda(arg=:x, body=:y)
+
+which is better, because we have code, that has typed part.
+
+# Remember, that we do things in eager mode:
+
+(lambda (x) ((lambda (y) x + y) 1)) -> (lambda (x) x + 1) # because the inner lambda gets evaluated. Of course, knowing that x will be known.
+
+let foo(n)
+    return n + n
+
+Here, function body evaluates firstly to quoted expression:
+    :(return n + n)
+as well as foo(n) -> :(foo(n))
+then the let evaluates them properly (does not evaluate foo, evaluates n + n where n is of type Unknown)
+
+
+
+
+
