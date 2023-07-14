@@ -32,9 +32,10 @@ end
 Base.show(io::IO, me::__Symbol__) = print(io, me.str)
 Base.show(io::IO, me::__Application__) = print(io, "($(me.operator) $(me.operand))")
 Base.show(io::IO, me::__Abstraction__) = print(io, "(λ $(me.argname) . $(me.code))")
-Base.show(io::IO, me::__Lambda__) = print(io, "(λ $(me.argname) . $(me.code))")
+Base.show(io::IO, me::__Lambda__) = print(io, "(λ $(me.argname) . $(me.code))[$(me.env)]")
 Base.show(io::IO, me::__NullEnvironment__) = print(io, "Nil")
-Base.show(io::IO, me::__FullEnvironment__) = print(io, "$(me.name): $(me.value), $(me.outer)")
+Base.show(io::IO, me::__FullEnvironment__) = (
+    val = replace("$(me.value)", r"\[.*\]" => ""); print(io, "$(me.name): $(val), $(me.outer)"))
 
 (λ::__Lambda__)(arg) = evaluate(λ.code, __FullEnvironment__(λ.argname, arg, λ.env))
 
@@ -66,7 +67,6 @@ macro γ(rator, rand)
 end
 
 macro γ(rator, rand, rest...)
-    println(rest)
     s = :(__Application__($rator, $rand))
     for r in rest
         s = :(__Application__($s, $r))
@@ -97,6 +97,23 @@ env = econs(
     S"cdr",
     evaluate((@λ S"cons" (@γ S"cons" S"#f")), env)
 )
+env = econs(
+    env,
+    S"0",
+    evaluate((@λ S"f" (@λ S"x" S"x")), env),
+)
+env = econs(
+    env,
+    S"incr",
+    evaluate((@λ S"num" (@λ S"f" (@λ S"x" (@γ S"f" (@γ S"num" S"f" S"x"))))), env)
+)
+for i in 1:16
+    env = econs(
+        env,
+        __Symbol__(string(i)),
+        evaluate(C(S"incr", __Symbol__(string(i-1))), env)
+    )
+end
 
 
 x = __Abstraction__(__Symbol__("x"), __Symbol__("x"))
@@ -113,7 +130,6 @@ evaluate(y, __NullEnvironment__())
 x = (@γ S"car" (@γ S"cons" S"#t" S"#f"))
 evaluate(x, env)
 
-
-
-
+x = (@γ  S"incr" S"1")
+evaluate(x, env)
 
