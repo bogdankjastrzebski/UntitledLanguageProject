@@ -6,17 +6,7 @@ struct __Symbol__ <: __AbstractExpression__
     str::String
 end
 
-struct __Abstraction__ <: __AbstractExpression__
-    argname::__Symbol__
-    code::__AbstractExpression__
-end
-
-struct __Application__ <: __AbstractExpression__
-    operator::__AbstractExpression__
-    operand::__AbstractExpression__
-end
-
-struct __Lambda__
+struct __Lambda__ <: __AbstractExpression__
     argname::__Symbol__
     code::__AbstractExpression__
     env::__AbstractEnvironment__
@@ -30,9 +20,10 @@ struct __FullEnvironment__ <: __AbstractEnvironment__
 end
 
 Base.show(io::IO, me::__Symbol__) = print(io, me.str)
-Base.show(io::IO, me::__Application__) = print(io, "($(me.operator) $(me.operand))")
-Base.show(io::IO, me::__Abstraction__) = print(io, "(λ $(me.argname) . $(me.code))")
-Base.show(io::IO, me::__Lambda__) = print(io, "(λ $(me.argname) . $(me.code))[$(me.env)]")
+function Base.show(io::IO, me::__Lambda__)
+    # here pattern matching for cons?
+    print(io, "(λ $(me.argname) . $(me.code))[$(me.env)]")
+end
 Base.show(io::IO, me::__NullEnvironment__) = print(io, "Nil")
 Base.show(io::IO, me::__FullEnvironment__) = (
     val = replace("$(me.value)", r"\[.*\]" => ""); print(io, "$(me.name): $(val), $(me.outer)"))
@@ -42,8 +33,13 @@ Base.show(io::IO, me::__FullEnvironment__) = (
 (env::__NullEnvironment__)(name) = error("No variable named \"$(name)\".")
 (env::__FullEnvironment__)(name) = name == env.name ? env.value : env.outer(name)
 
+cons = __Lambda__(S"x", __Lambda__(S"y", 
+var"#t" = __Lambda__
+var"#f" =  
+
 evaluate(symbol::__Symbol__, env::__AbstractEnvironment__) = env(symbol)
-evaluate(a::__Abstraction__, env::__AbstractEnvironment__) = __Lambda__(a.argname, a.code, env)
+evaluate(cons::__Lambda__, env::__AbstractEnvironment__) = __Lambda__(cons(__Lambda__(S"x", )), a.code, env)
+
 evaluate(a::__Application__, env::__AbstractEnvironment__) = evaluate(a.operator, env)(evaluate(a.operand, env))
 
 macro S_str(string)
