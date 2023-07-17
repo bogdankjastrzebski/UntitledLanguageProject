@@ -1,0 +1,136 @@
+
+
+abstract type __AbstractLambda__ end
+abstract type __AbstractOperand__ <: __AbstactLambda__ end
+abstract type __AbstractOperation__ <: __AbstractLambda__ end
+
+abstract type __AbstractSymbol__ <: __AbstractOperand__ end
+abstract type __AbstractList__ <: __AbstactOperand__ end
+abstract type __AbstractEnvironment__ <: __AbstractOperand__ end
+
+struct __Symbol__ <: __AbstractSymbol__
+    str::String
+end
+
+struct __Nil__ <: __AbstactList__ end
+struct __Cons__ <: __AbstactList__ 
+    car::__AbstractLambda__
+    cdr::__AbstractList__
+end
+
+struct __Lambda__
+    argname::__Symbol__
+    code::Union{__Symbol__, __Cons__}
+    env::__AbstractEnvironment__
+end
+
+struct __NullEnvironment__ <: __AbstractEnvironment__ end
+struct __FullEnvironment__ <: __AbstractEnvironment__
+    name::__Symbol__
+    value::__Lambda__
+    outer::__AbstractEnvironment__
+end
+
+Base.show(io::IO, me::__Symbol__) = print(io, me.str)
+Base.show(io::IO, me::__Cons__) = print(io, "($(me.car) $(me.cdr))")
+Base.show(io::IO, me::__Lambda__) = print(io, "(λ $(me.argname) . $(me.code))[$(me.env)]")
+Base.show(io::IO, me::__NullEnvironment__) = print(io, "Nil")
+Base.show(io::IO, me::__FullEnvironment__) = (
+    val = replace("$(me.value)", r"\[.*\]" => ""); print(io, "$(me.name): $(val), $(me.outer)"))
+
+(λ::__Lambda__)(arg) = evaluate(λ.code, __FullEnvironment__(λ.argname, arg, λ.env))
+
+(env::__NullEnvironment__)(name) = error("No variable named \"$(name)\".")
+(env::__FullEnvironment__)(name) = name == env.name ? env.value : env.outer(name)
+
+evaluate(symb::__Symbol__, env::__AbstractEnvironment__) = env(symb)
+function evaluate(expr::__Cons__, env::__AbstractEnvironment__)
+    if expr.car == __Symbol__("lambda")
+        __Lambda__(exp.cdr.car, exp.cdr.cdr.car, env)
+    else
+        evaluate(a.operator, env)(evaluate(a.operand, env))
+    end
+end
+
+macro S_str(string)
+    return :(__Symbol__($string))
+end
+
+to_expr(x::__Symbol__) = x
+to_expr(x::__Nil__) = x
+to_expr(x::__Cons__) = __Cons__(to_expr(x.car), to_expr(x.cdr))
+to_expr(x::String) = __Symbol__(x)
+to_expr(x::Symbol) = __symbol__(string(x))
+to_expr(x::Tuple) = length(x) == 0 ? __Nil__() : __Cons__(to_expr(x[1]), to_expr(x[2:end]))
+
+function make_env(values)
+    env = __NullEnvironment__()
+    for (name, value) in values
+        env = __FullEnvironment__(
+            to_expr(name), evaluate(to_expr(value), env), env,
+        )
+    end 
+    return env
+end
+
+# Make Environment
+env = make_env((
+    "#t" => (:lambda, :x, (:lambda, :y, :x)),
+    "#f" => (:lambda, :x, (:lambda, :y, :y))
+))
+
+# Lib
+env = __NullEnvironment__()
+env = econs(env, S"#t", evaluate((@λ S"x" (@λ S"y" S"x")), env))
+env = econs(env, S"#f", evaluate((@λ S"x" (@λ S"y" S"y")), env))
+env = econs(
+    env,
+    S"cons", 
+    evaluate((@λ S"car" (@λ S"cdr" (@λ S"ind" (@γ S"ind" S"car" S"cdr")))), env)
+)
+env = econs(
+    env,
+    S"car",
+    evaluate((@λ S"cons" (@γ S"cons" S"#t")), env)
+)
+env = econs(
+    env,
+    S"cdr",
+    evaluate((@λ S"cons" (@γ S"cons" S"#f")), env)
+)
+env = econs(
+    env,
+    S"0",
+    evaluate((@λ S"f" (@λ S"x" S"x")), env),
+)
+env = econs(
+    env,
+    S"incr",
+    evaluate((@λ S"num" (@λ S"f" (@λ S"x" (@γ S"f" (@γ S"num" S"f" S"x"))))), env)
+)
+for i in 1:16
+    env = econs(
+        env,
+        __Symbol__(string(i)),
+        evaluate(C(S"incr", __Symbol__(string(i-1))), env)
+    )
+end
+
+
+x = __Abstraction__(__Symbol__("x"), __Symbol__("x"))
+y = __Application__(x, x)
+
+x = L(S"x", S"x")
+y = C(x, x)
+
+x = (@λ S"x" (@γ (@λ S"x" S"x") S"x"))
+y = (@γ x (@λ S"x" S"x"))
+
+evaluate(y, __NullEnvironment__())
+
+x = (@γ S"car" (@γ S"cons" S"#t" S"#f"))
+evaluate(x, env)
+
+x = (@γ  S"incr" S"1")
+evaluate(x, env)
+
