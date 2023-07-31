@@ -135,14 +135,27 @@ evaluate(x, env)
 
 
 # Parser
+function get_expr!(sss)
+    if first(sss) == "("
+        popfirst!(sss)
+        expr = []
+        while first(sss) != ")"
+            push!(expr, get_expr!(sss))
+        end
+        popfirst!(sss)
+        return expr
+    else
+        return popfirst!(sss)
+    end
+end
+        
+    
 function lispparse(str)
     str = replace(str, "(" => " ( ")
     str = replace(str, ")" => " ) ")
     sss = split(str, ' ')
     return sss
 end
-
-
 
 
 
