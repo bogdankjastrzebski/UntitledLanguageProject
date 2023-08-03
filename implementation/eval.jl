@@ -66,7 +66,7 @@ Base.show(io::IO, me::__FullEnvironment__) = (
 evaluate(symbol::__Symbol__, env::__AbstractEnvironment__) = env(symbol)
 evaluate(a::__Cons__, env::__AbstractEnvironment__) = evaluate(a.value, env)(a.next, env)
 
-make_macro = __BuiltinMacro__((arg, env) -> )
+make_macro = __BuiltinMacro__((arg, env) -> __Macro__(arg, , env))
 
 function get_expr!(sss)
     if first(sss) == "("
@@ -93,6 +93,8 @@ function lispparse(str)
     sss = split(str)
     return get_expr!(sss)
 end
+
+example = "(lambda (x) (x x))"
 
 macro S_str(string)
     return :(__Symbol__($string))
