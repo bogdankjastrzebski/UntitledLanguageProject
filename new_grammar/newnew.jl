@@ -26,3 +26,26 @@ function fib(n: Integer): Integer
     return rev(1, 0, n)
 
 
+
+function monad
+    M{a} := a × String
+    f: A → M{A}
+    g: A → M{A}
+    let (f ∘ g)(x: A)
+        mf, mg: String
+        x, mf = f(x)
+        x, mg = g(x)
+        return x, mf ++ mg
+
+
+function (f ∘ g)(x)
+    return f(g(x))
+
+# The dark language
+
+let ((foo x) y)
+  incr! x y
+  set! x y
+  return x
+
+
