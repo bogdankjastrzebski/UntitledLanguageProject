@@ -25,3 +25,7 @@ second: (Bool → T) → T = \
 (pair 3 4): Bool → T
 
 (first (pair 3 4))
+
+f: I → I → I = x ↦ y ↦ x + y
+
+
