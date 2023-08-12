@@ -1,5 +1,4 @@
 
-
 : for type theory
 = for setting
 
@@ -7,6 +6,23 @@ n: Int
 n = 0
 n: Int = 0
 n := 0 # type infered
+
+n := do
+    asdf
+    
+data ℕ
+    zero: ℕ
+    succ: ℕ → ℕ
+
+fib : ℕ → ℕ
+fib = n ↦ n if n < 2 else fib(n-1) + fib(n-2)
+
+data 𝔹
+    ⊥ : 𝔹
+    ⊤ : 𝔹
+
+⊥ : 𝔹 = x ↦ y ↦ y
+⊤ : 𝔹 = x ↦ y ↦ x
 
 f: I ↦ I
 
@@ -43,11 +59,11 @@ let fib(n: Int): Int
     return b
 
 
-
-
-        
-
- 
+let fib(n: Int): Int
+  if n < 2
+      return n
+    else
+      return fib(n-1) + fib(n-2)
 
 
 
