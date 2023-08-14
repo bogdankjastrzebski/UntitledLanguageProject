@@ -66,4 +66,20 @@ let fib(n: Int): Int
       return fib(n-1) + fib(n-2)
 
 
+# How to prove inside lambda calculus?
+# Can we prove things inside lambda calculus, or should we start with types?
+#
+Each lambda is really a tuple:
+
+first  := pair ↦ pair(true)
+second := pair ↦ pair(false)
+
+func := (type_lambda, true_lambda)
+
+call := (func, x) ↦ second(func)(x)
+
+
+
+
+
 
