@@ -1,10 +1,10 @@
-module HelloWorld where
+module one where
 
 {-# FOREIGN GHC import qualified Data.Text.IO as Text #-}
 
 data Unit : Set where
   unit : Unit
-
+  
 {-# COMPILE GHC Unit = data () (()) #-}
 
 postulate
@@ -23,14 +23,21 @@ postulate
 
 {-# COMPILE GHC putStr = Text.putStr #-}
 
--- Natural Numbers
-
 data ℕ : Set where
     zero : ℕ
     succ : ℕ → ℕ
 
+{-# BUILTIN NATURAL ℕ #-}
 
+variable A B C : Set
+variable m n : ℕ 
 
+-- data List (A : Set) : Set where
+--    [] : List
+--    _++_ : A → MyList A → MyList A 
+
+l1 : List Nat
+l1 = 1 :: 2 :: 3 :: []
 
 main : IO Unit
 main = putStr "Hello, World!\n"
