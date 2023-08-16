@@ -80,6 +80,21 @@ call := (func, x) ↦ second(func)(x)
 
 
 
+# Agda inspired functions
 
+function fib : ℕ → ℕ
+    0           ↦ 0
+    suc(0)      ↦ suc(0)
+    suc(suc(n)) ↦ fib(n) + fib(suc(n))
+
+function fib : ℕ → ℕ
+    0           = 0
+    suc(0)      = suc(0)
+    suc(suc(n)) = fib(n) + fib(suc(n))
+
+fib : ℕ → ℕ
+fib(0) = 0
+fib(1) = 1
+fib(suc(suc(n))) = fib(n) + fib(suc(n))
 
 
