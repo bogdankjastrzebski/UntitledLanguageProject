@@ -22,12 +22,14 @@ _^_ : ℕ → ℕ → ℕ
 m ^ zero = suc zero
 m ^ (suc n) = m * (m ^ n)
 
-_-_ : ℕ → ℕ → ℕ
-m - zero = m
-zero - _ = zero
-(suc m) - (suc n) = m - n
+-- _-_ : ℕ → ℕ → ℕ
+-- m - zero = m
+-- zero - _ = zero
+-- (suc m) - (suc n) = m - n
+--_-_ : ℕ → ℕ → ℕ
+--m - n = ?
 
-infixl 6 _+_ _-_
+infixl 6 _+_ -- _-_
 infixl 7 _*_
 
 
