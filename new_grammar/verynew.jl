@@ -98,3 +98,14 @@ fib(1) = 1
 fib(suc(suc(n))) = fib(n) + fib(suc(n))
 
 
+# New
+
+Can we emulate the thing in standard lambda calculus?
+Yes, we should be able to do that. 
+
+
+
+
+
+
+
