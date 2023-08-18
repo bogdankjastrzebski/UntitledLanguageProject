@@ -22,12 +22,18 @@ _^_ : ℕ → ℕ → ℕ
 m ^ zero = suc zero
 m ^ (suc n) = m * (m ^ n)
 
--- _-_ : ℕ → ℕ → ℕ
--- m - zero = m
--- zero - _ = zero
--- (suc m) - (suc n) = m - n
---_-_ : ℕ → ℕ → ℕ
---m - n = ?
+_-_ : ℕ → ℕ → ℕ
+m - zero = m
+zero - suc n = zero
+suc m - suc n = m - n
+
+data _≡_ {A : Set} (x : A) : A → Set where
+    refl : x ≡ x
+
+infix 4 _≡_
+
++-assoc : ∀ {x y z} → x + (y + z) ≡ (x + y) + z
++-assoc {x} {y} {z} Z= {!!}
 
 infixl 6 _+_ -- _-_
 infixl 7 _*_

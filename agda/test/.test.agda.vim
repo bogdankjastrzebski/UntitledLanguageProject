@@ -1,0 +1,5 @@
+syn match agdaFunction "\<ℕ\>"
+syn match agdaConstructor "\<suc\>"
+syn match agdaFunction "\<Set\>"
+syn match agdaConstructor "\<zero\>"
+syn match agdaFunction "\<Prop\>"

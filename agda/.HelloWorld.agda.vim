@@ -1,0 +1,6 @@
+syn match agdaFunction "\<ℕ\>"
+syn match agdaFunction "\<IO\>"
+syn match agdaFunction "\<Set\>"
+syn match agdaConstructor "\<succ\>\|\<unit\>\|\<zero\>"
+syn match agdaFunction "\<Prop\>\|\<Unit\>\|\<main\>"
+syn match agdaFunction "\<String\>\|\<putStr\>"
