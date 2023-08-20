@@ -125,8 +125,8 @@ d_fib'8320'_196 v0
              C_zero_162 -> coe v0
              C_suc_164 v2
                -> coe
-                    d__'43'__166 (coe d_fib'8320'_196 (coe v1))
-                    (coe d_fib'8320'_196 (coe v2))
+                    d__'43'__166 (coe d_fib'8320'_196 (coe v2))
+                    (coe d_fib'8320'_196 (coe v1))
              _ -> MAlonzo.RTE.mazUnreachableError
       _ -> MAlonzo.RTE.mazUnreachableError
 -- HelloWorld.fib₁-rec
@@ -145,51 +145,9 @@ d_fib'8321'_212 v0
   = coe
       d_fib'8321''45'rec_200 (coe C_suc_164 (coe C_zero_162))
       (coe C_zero_162) (coe v0)
--- HelloWorld.pr
-d_pr_220 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_pr_220 = erased
--- HelloWorld.pr1
-d_pr1_232 ::
-  (T_ℕ_160 -> T_ℕ_160) -> T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_pr1_232 = erased
--- HelloWorld.pr2
-d_pr2_244 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_pr2_244 = erased
--- HelloWorld.pr4
-d_pr4_252 :: T_ℕ_160 -> T__'8801'__6
-d_pr4_252 = erased
--- HelloWorld.skip-cong
-d_skip'45'cong_270 ::
-  () ->
-  () ->
-  () ->
-  (AgdaAny -> AgdaAny -> AgdaAny) ->
-  AgdaAny -> AgdaAny -> AgdaAny -> T__'8801'__6 -> T__'8801'__6
-d_skip'45'cong_270 = erased
--- HelloWorld.pr3
-d_pr3_280 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_pr3_280 = erased
--- HelloWorld.lemma₀
-d_lemma'8320'_290 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_lemma'8320'_290 = erased
--- HelloWorld._.0≡fib₀0
-d_0'8801'fib'8320'0_298 :: T_ℕ_160 -> T__'8801'__6
-d_0'8801'fib'8320'0_298 = erased
--- HelloWorld._.1≡fib₀1
-d_1'8801'fib'8320'1_300 :: T_ℕ_160 -> T__'8801'__6
-d_1'8801'fib'8320'1_300 = erased
--- HelloWorld._.m+0≡m
-d_m'43'0'8801'm_302 :: T_ℕ_160 -> T__'8801'__6
-d_m'43'0'8801'm_302 = erased
--- HelloWorld.lemma₁
-d_lemma'8321'_310 :: T_ℕ_160 -> T__'8801'__6
-d_lemma'8321'_310 = erased
--- HelloWorld.pr5
-d_pr5_318 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
-d_pr5_318 = erased
--- HelloWorld.pr6
-d_pr6_326 :: T_ℕ_160 -> T__'8801'__6
-d_pr6_326 = erased
+-- HelloWorld.lemma-giant-step
+d_lemma'45'giant'45'step_220 :: T_ℕ_160 -> T_ℕ_160 -> T__'8801'__6
+d_lemma'45'giant'45'step_220 = erased
 -- HelloWorld.theorem
-d_theorem_332 :: T_ℕ_160 -> T__'8801'__6
-d_theorem_332 = erased
+d_theorem_230 :: T_ℕ_160 -> T__'8801'__6
+d_theorem_230 = erased

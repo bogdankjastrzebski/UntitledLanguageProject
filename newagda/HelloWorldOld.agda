@@ -110,7 +110,7 @@ postulate
 fib₀ : ℕ → ℕ
 fib₀ zero = zero
 fib₀ (suc zero) = suc zero
-fib₀ (suc (suc n)) = fib₀ n + fib₀ (suc n)
+fib₀ (suc (suc n)) = fib₀ (suc n) + fib₀ n
 
 fib₁-rec : ℕ → ℕ → ℕ → ℕ 
 fib₁-rec a b zero = b
@@ -119,82 +119,102 @@ fib₁-rec a b (suc n) = fib₁-rec b (a + b) n
 fib₁ : ℕ → ℕ
 fib₁ n = fib₁-rec (suc zero) zero n
 
-lemma-giant-step : ∀ (m n : ℕ)
-    → fib₁-rec zero (suc zero) (m + n)
-    ≡ fib₁-rec (fib₀ n) (fib₀ (suc n)) m
-lemma-giant-step m zero = begin
-    fib₁-rec zero (suc zero) (m + zero)
-  ≡⟨ ≡-cong (fib₁-rec zero (suc zero)) (+-identity m) ⟩
-    fib₁-rec (fib₀ zero) (fib₀ (suc zero)) m
-  end
-lemma-giant-step m (suc n) = begin
-    fib₁-rec zero (suc zero) (m + suc n)
-  ≡⟨ ≡-cong (fib₁-rec zero (suc zero)) (+-suc m n) ⟩
-    fib₁-rec zero (suc zero) (suc m + n)
-  ≡⟨ lemma-giant-step (suc m) n ⟩
+-- proof that
+-- fib₁-rec 1 0 m = fib₁-rec a b n = fib₁-rec (fib₀ m-n-1) fib₀ (m-n) n
+
+pr : ∀ (m n : ℕ) → suc m + n ≡ suc (m + n)
+pr m n = refl
+
+pr1 : ∀ (f : ℕ → ℕ) → ∀ (m n : ℕ) → suc (f m) + n ≡ suc (f m + n)
+pr1 f m n = refl
+
+pr2 : ∀ (m n : ℕ)
+    → fib₁-rec (fib₀ n) (fib₀ (suc n)) (suc m)
+    ≡ fib₁-rec (fib₀ (suc n)) (fib₀ n + fib₀ (suc n)) m
+pr2 m n = refl
+
+pr4 : ∀ (n : ℕ)
+    → fib₀ (suc n) + fib₀ n
+    ≡ fib₀ (suc (suc n))
+pr4 zero = refl
+pr4 (suc zero) = refl
+pr4 (suc (suc n)) = refl
+
+skip-cong : ∀ {A B C : Set} (f : A → B → C) {a₁ a₂ : A} (b : B)
+    → a₁ ≡ a₂
+    → f a₁ b ≡ f a₂ b
+skip-cong f b refl = refl
+
+pr3 : ∀ (m n : ℕ)
+    → fib₁-rec (fib₀ n) (fib₀ (suc n)) (suc m)
+    ≡ fib₁-rec (fib₀ (suc n)) (fib₀ (suc (suc n))) m
+pr3 m n =
+  begin
+    fib₁-rec (fib₀ n) (fib₀ (suc n)) (suc m)
+    ≡⟨ pr2 m n ⟩
+    fib₁-rec (fib₀ (suc n)) (fib₀ n + fib₀ (suc n)) m
+    ≡⟨ skip-cong
+        (fib₁-rec (fib₀ (suc n))) m (+-comm (fib₀ n) (fib₀ (suc n))) ⟩
+    fib₁-rec (fib₀ (suc n)) (fib₀ (suc n) + fib₀ n) m
+    ≡⟨ skip-cong (fib₁-rec (fib₀ (suc n))) m (pr4 n) ⟩
     fib₁-rec (fib₀ (suc n)) (fib₀ (suc (suc n))) m
   end
 
-{--
-    ≡-cong₃ fib₁-rec 0≡fib₀0 1≡fib₀1 m+0≡m where
+
+lemma₀ : ∀ (m n : ℕ)
+    → fib₁-rec zero (suc zero) (m + n) ≡ fib₁-rec (fib₀ n) (fib₀ (suc n)) m
+lemma₀ m zero = ≡-cong₃ fib₁-rec 0≡fib₀0 1≡fib₀1 m+0≡m where
+
     0≡fib₀0 : zero ≡ (fib₀ zero)
     0≡fib₀0 = refl
+
     1≡fib₀1 : suc zero ≡ (fib₀ (suc zero))
     1≡fib₀1 = refl
+
     m+0≡m : m + zero ≡ m
     m+0≡m = +-identity m
---}
-{--
+
+lemma₀ m (suc n) =
   begin
     fib₁-rec zero (suc zero) (m + suc n)
-  ≡⟨ ≡-cong (fib₁-rec zero (suc zero)) (+-suc m n) ⟩
+    ≡⟨ ≡-cong (fib₁-rec zero (suc zero)) (+-suc m n) ⟩
     fib₁-rec zero (suc zero) (suc (m + n))
-  ≡⟨⟩  
+    --≡⟨ ≡-cong (fib₁-rec zero (suc zero))  ⟩
+    ≡⟨⟩ -- def ??  
     fib₁-rec zero (suc zero) (suc m + n)
-  ≡⟨ lemma-giant-step (suc m) n ⟩
+    ≡⟨ lemma₀ (suc m) n ⟩
     fib₁-rec (fib₀ n) (fib₀ (suc n)) (suc m)
-  ≡⟨⟩
+    ≡⟨ pr3 m n ⟩
+    fib₁-rec (fib₀ (suc n)) (fib₀ (suc n) + fib₀ n) m
+    ≡⟨⟩
     fib₁-rec (fib₀ (suc n)) (fib₀ (suc (suc n))) m
   end
---}
+
+lemma₁ : ∀ (n : ℕ)
+    → fib₁ (suc n) ≡ fib₁-rec zero (suc zero) n
+lemma₁ n = refl 
+
+pr5 : ∀ (a b : ℕ)
+    → fib₁-rec a b zero ≡ b
+pr5 a b = refl
+
+pr6 : ∀ (n : ℕ)
+    → zero + n ≡ n
+pr6 n = refl
 
 theorem : ∀ (n : ℕ)
     → fib₁ n ≡ fib₀ n
 theorem zero = refl
-theorem (suc n) = begin
-    fib₁ (suc n)
-  ≡⟨ lemma-giant-step zero n ⟩
-    fib₀ (suc n)
-  end
-{--
+theorem (suc n) = 
     begin
         fib₁ (suc n)
-      ≡⟨⟩
+        ≡⟨ lemma₁ n ⟩
         fib₁-rec zero (suc zero) n
-      ≡⟨⟩
+        ≡⟨ ≡-cong (fib₁-rec zero (suc zero)) (pr6 n) ⟩
         fib₁-rec zero (suc zero) (zero + n)
-      ≡⟨ lemma-giant-step zero n ⟩
+        ≡⟨ lemma₀ zero n ⟩
         fib₁-rec (fib₀ n) (fib₀ (suc n)) zero
-      ≡⟨⟩
+        ≡⟨ pr5 (fib₀ n) (fib₀ (suc n)) ⟩
         fib₀ (suc n)
     end        
---}
-
-
-
-unique-zero : ∀ (m n : ℕ)
-    → m + n ≡ m
-    → n ≡ zero
-unique-zero zero n m+n≡n = {!   !}
-unique-zero (suc m) n m+n≡n = {!   !}
-    
-
-
-
-
-
-
-
-
-
 
