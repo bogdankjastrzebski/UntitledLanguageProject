@@ -180,7 +180,7 @@ theorem (suc n) = begin
     end        
 --}
 
-
+{--
 
 unique-zero : ∀ (m n : ℕ)
     → m + n ≡ m
@@ -188,13 +188,70 @@ unique-zero : ∀ (m n : ℕ)
 unique-zero zero n m+n≡n = {!   !}
 unique-zero (suc m) n m+n≡n = {!   !}
     
+--}
+
+_*_ : ℕ → ℕ → ℕ
+zero * n = zero
+suc m * n = n + (m * n)
+
+
+--data ℕ₊ (n : ℕ) : Set where
+--    next : ∀ (m : ℕ) → ℕ₊ (suc m)
+
+data ℕ₊ : ℕ → Set where
+    next : ∀ (m : ℕ) → ℕ₊ (suc m)
+
+    --one : ℕ₊
+    --suc : ℕ₊ → ℕ₊
+
+record ℚ : Set where
+    constructor _//1+_
+    field
+        ↑ : ℕ
+        ↓ : ℕ
+
+gdc : ℕ → ℕ → ℕ
+gdc :  
+gdc 
+
+--to-normal-form : 
 
 
 
 
+data _≡ℚ_ (x : ℚ) : ℚ → Set where
+    refl : x ≡ℚ x
 
+{--
 
+data _≡_ {A : Set} (x : A) : A → Set where
+    refl : x ≡ x
+infixr 4 _≡_
 
+≡-sym : ∀ {A : Set} {x y : A}
+    → x ≡ y
+    → y ≡ x
+≡-sym refl = refl
 
+≡-trans : ∀ {A : Set} {x y z : A}
+    → x ≡ y
+    → y ≡ z
+    → x ≡ z
+≡-trans refl refl = refl
 
+≡-cong : ∀ {A B : Set} (f : A → B) {x y : A}
+    → x ≡ y
+    → f x ≡ f y
+≡-cong f refl = refl
 
+≡-cong₂ : ∀ {A B C : Set} (f : A → B → C) {a₁ a₂ : A} {b₁ b₂ : B}
+    → a₁ ≡ a₂
+    → b₁ ≡ b₂
+    → f a₁ b₁ ≡ f a₂ b₂
+≡-cong₂ f refl refl = refl
+
+≡-cong₃ : ∀ {A B C D : Set} (f : A → B → C → D) {a₁ a₂ : A} {b₁ b₂ : B} {c₁ c₂ : C}
+    → a₁ ≡ a₂
+    → b₁ ≡ b₂
+    → c₁ ≡ c₂
+--}
