@@ -210,10 +210,6 @@ record ℚ : Set where
         ↑ : ℕ
         ↓ : ℕ
 
-gdc : ℕ → ℕ → ℕ
-gdc :  
-gdc 
-
 --to-normal-form : 
 
 
