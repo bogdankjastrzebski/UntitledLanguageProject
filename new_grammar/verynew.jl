@@ -196,4 +196,20 @@ fib := (n: i32) -> n < 2 ? n : fib(n-1) + fib(n-2)
 
 fib: i32 -> i32 = n -> n < 2 ? n : fib(n-1) + fib(n-2)
 
+function fib : (n : ℕ) → ℕ
+    fib 0 = 0
+    fib 1 = 1
+    fib n = fib (n-1) + fib (n-2)
+
+fib : ℕ → ℕ
+  fib(0) = 0
+  fib(1) = 1
+  fib(n) = fib(n-1) + fib(n-2)
+
+foo : ℕ → ℕ → ℕ
+  foo(x)(y) = x + y
+
+bar : ℕ × ℕ → ℕ
+  bar(x, y) = x + y
+
 
