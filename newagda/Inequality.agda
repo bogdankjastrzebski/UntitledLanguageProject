@@ -70,5 +70,7 @@ data Total (m n : ℕ) : Set where
 +-≤-monoˡ {zero} {n} {k} n≤k = n≤k
 +-≤-monoˡ {suc m} {n} {k} n≤k = s≤s (+-≤-monoʳ {m} {n} {k} n≤k)
 
+
+
 -- module ≤-Reasoning 
 

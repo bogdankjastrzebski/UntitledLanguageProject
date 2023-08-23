@@ -171,3 +171,23 @@ let fib(n : ℕ) → ℕ
     for _ in 0..n
         a,b=b,a+b
     return b
+
+
+fib : ℕ → ℕ
+fib 0 = 0
+fib 1 = 1
+fib n = fib (n - 1) + fib (n - 2)
+
+fib : (n : ℕ) → ℕ
+  case n
+    0 => 0
+    1 => 1
+    _ => fib(n)
+
+fib(n: i32): i32
+    a, b: i32 = 1, 0
+    while n > 0
+        a, b = b, a + b
+    return b
+
+
