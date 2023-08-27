@@ -57,20 +57,36 @@ data Total (m n : ℕ) : Set where
 --... | forward m≤n = forward (s≤s m≤n)
 --... | flipped n≤m = flipped (s≤s n≤m)
 
++-≤-comm : ∀ {m n : ℕ}
+    → m + n ≤ n + m
++-≤-comm {zero} {n} = {! s≤s  !}
++-≤-comm {suc m} {n} = {!   !}
+
 +-≤-monoʳ : ∀ {m n k : ℕ}
     → n ≤ k
     → m + n ≤ m + k
 +-≤-monoʳ {zero} {n} {k} n≤k = n≤k
 +-≤-monoʳ {suc m} {n} {k} n≤k = s≤s (+-≤-monoʳ {m} {n} {k} n≤k)
 
-
+{--
 +-≤-monoˡ : ∀ {m n k : ℕ}
     → n ≤ k
-    → m + n ≤ m + k
-+-≤-monoˡ {zero} {n} {k} n≤k = n≤k
-+-≤-monoˡ {suc m} {n} {k} n≤k = s≤s (+-≤-monoʳ {m} {n} {k} n≤k)
+    → n + m ≤ k + m
+--+-≤-monoˡ {m} {n} {k} n≤k rewrite +-comm n m | +-comm k m = +-≤-monoʳ {k} {m} {n} n≤k
++-≤-monoˡ {m} {n} {k} n≤k = ≤-trans (≤-trans n+m≤m+n m+n≤m+k) m+k≤k+m
+    where
+        lemma : ∀ (m n : ℕ)
+            → m ≡ n
+            → m ≤ n
+        lemma zero zero m≡n = z≤s
+        lemma (suc m) (suc n) m≡n = s≤s (lemma m n ?)
 
-
++-≤-mono : ∀ {m n k l : ℕ}
+    → m ≤ n
+    → k ≤ l
+    → m + k ≤ n + l
++-≤-mono {m} {n} {k} {l} m≤n k≤l = ≤-trans (+-≤-monoˡ {m} {n} {k} m≤n) (+-≤-monoʳ {n} {k} {l} k≤l)
+--}
 
 -- module ≤-Reasoning 
 

@@ -6,7 +6,7 @@ open ≡-Reasoning
 
 
 gcd : ℕ → ℕ → ℕ
-gcd m n = ?
+gcd m n = 
 
 
 data ℕ₊ : ℕ → Set where
