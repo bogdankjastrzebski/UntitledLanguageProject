@@ -1,0 +1,6 @@
+syn match agdaFunction "\<⊤\>"
+syn match agdaFunction "\<IO\>"
+syn match agdaFunction "\<Set\>"
+syn match agdaFunction "\<Prop\>\|\<main\>"
+syn match agdaFunction "\<String\>"
+syn match agdaFunction "\<putStrLn\>"
