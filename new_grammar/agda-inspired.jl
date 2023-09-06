@@ -42,6 +42,28 @@ case n
     1 => 1
     n => fib(n-1) + fib(n-2)
  
+# Memory Model
+using LinearTypes
+
+x: Foo = f()
+# Error: x not consumed
+
+x: Foo = f()
+g(x)
+g(x) # Error: x consumed twice.
+
+x: Foo = f()
+g(x) # OK
+
+x: Foo = f()
+if whatever()
+    g(x)
+  else
+    pass
+# Error, x not-consistently consumed.
+x: Foo = f()
+while True
+  g(x)  # Error: consumed in loop
 
 
 
