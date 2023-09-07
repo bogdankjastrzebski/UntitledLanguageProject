@@ -75,12 +75,19 @@ fib : ℕ → ℕ
     return fib n₀ + fib (suc n₁)
 
 
+# Calling functions
 
+Method : {I O : Set} → Set
+Method {I} {O} = String × ... × I → O # Name, metadata, actual function
 
+method_call : {I O : Set} → Method {I} {O} → I → O
+    method_call {I} {O} (name, ..., func) = func
 
-
-
-
-
+fib n # function call
+fib(n)
+  -> (method_call fib (n,))
+  -> ((method_call fib) (n, ))
+  -> (func (n, ))
+  -> output
 
 
