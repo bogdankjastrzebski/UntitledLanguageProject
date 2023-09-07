@@ -66,4 +66,21 @@ while True
   g(x)  # Error: consumed in loop
 
 
+# Agda style linear types:
+fib : ℕ → ℕ
+  fib zero = zero
+  fib (suc zero) = (suc zero)
+  fib (suc (suc n))
+    n₀, n₁ := copy n
+    return fib n₀ + fib (suc n₁)
+
+
+
+
+
+
+
+
+
+
 
