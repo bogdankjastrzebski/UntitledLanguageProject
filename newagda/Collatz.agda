@@ -1,13 +1,17 @@
 module Collatz where
 
-data Even : Set
-data Odd : Set
+data ℕ : Set where 
+    zero : ℕ 
+    suc : ℕ → ℕ
+
+data Even : ℕ → Set
+data Odd  : ℕ → Set
 
 data Even where
-    zero : Even
-    suc : Odd → Even
+    even-zero : Even zero
+    even-suc : {n : ℕ} → Odd n → Even (suc n)
 
 data Odd where
-    suc : Even → Odd
+    suc : {n : ℕ} → Even n → Odd (suc n)
 
 collatz : 
