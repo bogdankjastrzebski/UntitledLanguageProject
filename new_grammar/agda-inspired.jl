@@ -75,6 +75,12 @@ fib : ℕ → ℕ
     return fib n₀ + fib (suc n₁)
 
 
+a := make_a()
+b, c := (copy a) # a get's destroyed
+print b # b get's destroyed
+delete c # delete c 
+
+
 # Calling functions
 
 Method : {I O : Set} → Set

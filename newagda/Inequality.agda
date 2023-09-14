@@ -71,7 +71,10 @@ data Total (m n : ℕ) : Set where
 +-≤-monoˡ : ∀ {m n k : ℕ}
     → n ≤ k
     → n + m ≤ k + m
-+-≤-monoˡ {m} {n} {k} n≤k rewrite +-comm n m | +-comm k m = +-≤-monoʳ {k} {m} {n} n≤k 
++-≤-mono {zero} {n} {k} n≤k = n≤k
++-≤-monoʳ {suc m} {n} {k} n≤k = s≤s (+-≤-monoʳ {m} {n} {k} n≤k)
+
+-- +-≤-monoˡ {m} {n} {k} n≤k rewrite +-comm n m | +-comm k m = +-≤-monoʳ {k} {m} {n} n≤k 
 
 {--
 +-≤-monoˡ : ∀ {m n k : ℕ}
