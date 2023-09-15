@@ -57,10 +57,17 @@ data Total (m n : ℕ) : Set where
 --... | forward m≤n = forward (s≤s m≤n)
 --... | flipped n≤m = flipped (s≤s n≤m)
 
+≡-to-≤ : ∀ {m n : ℕ}
+    → m ≡ n
+    → m ≤ n
+≡-to-≤ {zero} {zero} m≡n = z≤s
+≡-to-≤ {suc m} {suc n} m≡n = s≤s {m} {n} (≡-to-≤ {m} {n})
+
 +-≤-comm : ∀ {m n : ℕ}
     → m + n ≤ n + m
-+-≤-comm {zero} {n} = {! s≤s  !}
-+-≤-comm {suc m} {n} = {!   !}
+--+-≤-comm {zero} {n} = ≤-refl n
+--+-≤-comm {suc m} {n} = ?
+
 
 +-≤-monoʳ : ∀ {m n k : ℕ}
     → n ≤ k
@@ -71,8 +78,15 @@ data Total (m n : ℕ) : Set where
 +-≤-monoˡ : ∀ {m n k : ℕ}
     → n ≤ k
     → n + m ≤ k + m
-+-≤-mono {zero} {n} {k} n≤k = n≤k
-+-≤-monoʳ {suc m} {n} {k} n≤k = s≤s (+-≤-monoʳ {m} {n} {k} n≤k)
++-≤-monoˡ {m} {n} {k} n≤k = ≤-trans (≤-trans (+-≤-comm {n} {m}) (+-≤-monoʳ n≤k)) (+-≤-comm {m} {k})
+
++-≤-mono : ∀ {m n p q : ℕ}
+    → m ≤ n
+    → p ≤ q
+    → m + p ≤ n + q
++-≤-mono {m} {n} {p} {k} m≤k p≤q = ≤-trans (+-≤-monoˡ {p} m≤k) (+-≤-monoʳ {n} p≤q)
+
+
 
 -- +-≤-monoˡ {m} {n} {k} n≤k rewrite +-comm n m | +-comm k m = +-≤-monoʳ {k} {m} {n} n≤k 
 
