@@ -38,6 +38,12 @@ suc m + n = suc (m + n)
     suc (suc m + n)
   end
 
+-- +-sum : ∀ (m n k : ℕ) → m + k ≡ n + k → m ≡ n
+-- +-sum m n k = ?
+
+-- +-suc≡suc : ∀ (m n : ℕ) → suc m ≡ suc n → m ≡ n
+-- +-suc≡suc zero zero sucm≡sucn = refl
+
 +-comm : ∀ (m n : ℕ) → m + n ≡ n + m
 +-comm m zero = begin
     m + zero

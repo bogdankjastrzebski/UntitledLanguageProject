@@ -60,14 +60,11 @@ data Total (m n : ℕ) : Set where
 ≡-to-≤ : ∀ {m n : ℕ}
     → m ≡ n
     → m ≤ n
-≡-to-≤ {zero} {zero} m≡n = z≤s
-≡-to-≤ {suc m} {suc n} m≡n = s≤s {m} {n} (≡-to-≤ {m} {n})
+≡-to-≤ {m} {.m} refl = ≤-refl
 
 +-≤-comm : ∀ {m n : ℕ}
     → m + n ≤ n + m
---+-≤-comm {zero} {n} = ≤-refl n
---+-≤-comm {suc m} {n} = ?
-
++-≤-comm {m} {n} = ≡-to-≤ (+-comm m n)
 
 +-≤-monoʳ : ∀ {m n k : ℕ}
     → n ≤ k
