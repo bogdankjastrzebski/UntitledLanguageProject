@@ -22,10 +22,17 @@ suc m + n = suc (m + n)
     suc m + (n + k)
   end
 
+--≡-cong : ∀ (f : ℕ → ℕ) -> x ≡ y → f x ≡ f y
+
 +-identity : ∀ (m : ℕ) → m + zero ≡ m
 +-identity zero = refl
 +-identity (suc m) = begin
     suc m + zero
+  ≡⟨⟩
+    suc (m + zero)
+  --≡⟨ +-identity m ⟩ -- m + zero ≡ m | suc (m + zero) ≡ suc m
+  --  suc m
+  --end
   ≡⟨ ≡-cong suc (+-identity m) ⟩ 
     suc m
   end

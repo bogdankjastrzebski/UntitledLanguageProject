@@ -5,7 +5,6 @@ open import NaturalNumbers
 
 open ≡-Reasoning
 
-
 fib₀ : ℕ → ℕ
 fib₀ zero = zero
 fib₀ (suc zero) = suc zero
