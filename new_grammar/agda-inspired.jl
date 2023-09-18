@@ -96,4 +96,13 @@ fib(n)
   -> (func (n, ))
   -> output
 
+# so for instance:
+
+a := w x + b # where w is linear is ok.
+
+func := (quote a + b)
+
+data := (select * from df where something)
+
+
 
