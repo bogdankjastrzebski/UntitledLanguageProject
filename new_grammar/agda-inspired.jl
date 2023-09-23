@@ -105,4 +105,15 @@ func := (quote a + b)
 data := (select * from df where something)
 
 
+# Alternative number creation
+postulate
+    ℕ : Set
+    zero : ℕ
+    suc  : ℕ → ℕ
+ 
+
+    
+
+
+
 
