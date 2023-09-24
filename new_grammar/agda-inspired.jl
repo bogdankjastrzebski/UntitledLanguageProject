@@ -112,8 +112,8 @@ postulate
     suc  : ℕ → ℕ
  
 
-    
+# Is → an operator?
+# is it an operator?
 
-
-
+func := (g ↦ f (g g)) (g ↦ f (g g))
 
