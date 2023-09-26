@@ -117,3 +117,14 @@ postulate
 
 func := (g ↦ f (g g)) (g ↦ f (g g))
 
+It is an operator, it takes two types and returns a type:
+
+_→_ : Set × Set → Set # But how to define it?
+a → b = builtin
+
+
+
+
+
+
+
