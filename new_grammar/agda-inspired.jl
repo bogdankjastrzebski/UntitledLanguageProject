@@ -117,13 +117,17 @@ postulate
 
 func := (g ↦ f (g g)) (g ↦ f (g g))
 
-It is an operator, it takes two types and returns a type:
+# It is an operator, it takes two types and returns a type:
 
 _→_ : Set × Set → Set # But how to define it?
 a → b = builtin
 
+# Proc Model as Monad
 
+CPU : Name → Value
 
+_ | _ <- _ : Device → Name → Value → Device   
+something | Name <- Value 
 
 
 
