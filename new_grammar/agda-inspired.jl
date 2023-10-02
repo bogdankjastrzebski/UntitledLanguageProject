@@ -126,9 +126,16 @@ a → b = builtin
 
 CPU : Name → Value
 
+record CPU
+    stack ... 
+
+
 _ | _ <- _ : Device → Name → Value → Device   
 something | Name <- Value 
 
-
+memory : CPU = empty
+memory = memory | a : i32
+memory = memory | a <- 3
+memory = memory ...
 
 
