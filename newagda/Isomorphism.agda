@@ -145,7 +145,7 @@ module ≃-Reasoning where
 
 open ≃-Reasoning
 
-
+-- Isomorphism
 
 
 
