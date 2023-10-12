@@ -145,11 +145,35 @@ module ≃-Reasoning where
 
 open ≃-Reasoning
 
--- Isomorphism
+-- Embedding
+
+infix 0 _≲_
+record _≲_ (A B : Set) : Set where
+    field 
+        to      : A → B
+        from    : B → A
+        from∘to : ∀ (x : A) → from (to x) ≡ x
+open _≲_
 
 
+≲-refl : ∀ {A : Set} → A ≲ A
+≲-refl = record
+    { to      = λ{x → x}
+    ; from    = λ{y → y}
+    ; from∘to = λ{x → refl} }
 
-
-
-
-
+≲-trans : ∀ {A B C : Set} → A ≲ B → B ≲ C → A ≲ C
+≲-trans A≲B B≲C = record
+    { to      = (to B≲C) ∘ (to A≲B)
+    ; from    = (from A≲B) ∘ (from B≲C)
+    ; from∘to = λ{x →
+        begin
+            (((from A≲B) ∘ (from B≲C)) ∘ ((to B≲C) ∘ (to A≲B))) x
+        ≡⟨⟩
+            from A≲B (from B≲C (to B≲C (to A≲B x)))
+        ≡⟨ ≡-cong (from A≲B) (from∘to B≲C (to A≲B x)) ⟩
+            from A≲B (to A≲B x)
+        ≡⟨ from∘to A≲B x ⟩
+            x
+        end } }
+        
