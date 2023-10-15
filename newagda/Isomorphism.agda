@@ -176,4 +176,5 @@ open _≲_
         ≡⟨ from∘to A≲B x ⟩
             x
         end } }
-        
+
+-- Iso
