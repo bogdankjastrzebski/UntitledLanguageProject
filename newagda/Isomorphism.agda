@@ -177,4 +177,62 @@ open _≲_
             x
         end } }
 
+
+≲-antisym : ∀ {A B : Set}
+    → (A≲B : A ≲ B)
+    → (B≲A : B ≲ A)
+    → (to A≲B ≡ from B≲A)
+    → (from A≲B ≡ to B≲A)
+    → A ≃ B 
+≲-antisym A≲B B≲A to≡from from≡to = record
+    { to      = to A≲B
+    ; from    = from A≲B
+    ; from∘to = from∘to A≲B
+    ; to∘from = λ{y →
+        begin
+            to A≲B (from A≲B y)
+        ≡⟨ ≡-cong (to A≲B) (≡-cong-app from≡to y) ⟩
+            to A≲B (to B≲A y)
+        ≡⟨ ≡-cong-app to≡from (to B≲A y) ⟩
+            from B≲A (to B≲A y)
+        ≡⟨ from∘to B≲A y ⟩
+            y
+        end } }
+
+module ≲-Reasoning where
+    
+    infix  1 ≲-begin_
+    infixr 2 _≲⟨_⟩_
+    infix  3 _≲-end
+    
+    ≲-begin_ : ∀ {A B : Set}
+        → A ≲ B
+        → A ≲ B
+    ≲-begin A≲B = A≲B
+
+    _≲⟨_⟩_ : ∀ (A : Set) {B C : Set}
+        → A ≲ B
+        → B ≲ C
+        → A ≲ C
+    A ≲⟨ A≲B ⟩ B≲C = ≲-trans A≲B B≲C
+
+    _≲-end : ∀ (A : Set)
+        → A ≲ A
+    A ≲-end = ≲-refl
+
+open ≲-Reasoning
+
+≃-implies-≲ : ∀ {A B : Set}
+    → A ≃ B
+    → A ≲ B 
+≃-implies-≲ A≃B = record
+    { to      = to A≃B
+    ; from    = from A≃B
+    ; from∘to = from∘to A≃B }
+
 -- Iso
+
+
+
+
+
