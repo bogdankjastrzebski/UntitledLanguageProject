@@ -141,4 +141,8 @@ memory = memory ...
 
 # The point is to prove some things about the code
 
+# But how to do it efficiently?
+
+
+
 
