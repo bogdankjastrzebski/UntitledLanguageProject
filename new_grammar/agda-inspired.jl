@@ -143,6 +143,4 @@ memory = memory ...
 
 # But how to do it efficiently?
 
-
-
-
+# But do we really want agda-like syntax? 
