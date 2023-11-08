@@ -33,4 +33,11 @@ code
 foo(x)
     return x + x
 
+foo(x)(y)
+    return x + y
+
+foo a b #macro
+  quote
+    $a $b
+           
 
