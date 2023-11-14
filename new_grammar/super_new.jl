@@ -49,7 +49,7 @@ let fib(n: Int): Int
 
 let fib: Int → Int = n ↦ n if n ≤ 1 else fib(n-1) + fib(n-2)
 
-let fib: Int → Int
+function fib: Int → Int
     fib(0) = 0
     fib(1) = 1
     fib(suc(suc(n))) = fib(suc(n)) + fib(n)
