@@ -37,15 +37,24 @@ remove_inf(x) = x == Inf ? maxintfloat() : x
 
 k = 0
 hyper = (x, y) -> Dict((0, 0) => 0.5, (0, 1) => 1.0,
-                       (1, 0) => 1.0, (1, 1) => 0.0)[(x,y)]
+                       (1, 0) => 1.0, (1, 1) => -4.0)[(x,y)]
 heatmap([
   (power^0 ∘ rewop^0)(average(power^k ∘ hyper,
-                   (x, y) -> p^x * (1-p)^(1-x) * q^x * (1-q)^(1-x)))
+                   (x, y) -> p^x * (1-p)^(1-x) * q^y * (1-q)^(1-y)))
   for p in 0:(1/39):1, q in 0:(1/39):1
 ])
 
 
-
-
+k = 0
+hyper = (x, y) -> Dict((0, 0) => 0.5, (0, 1) => 1.0,
+                       (1, 0) => 1.0, (1, 1) => -1000.0)[(x,y)]
+f = arg -> let p = arg[1],
+               q = arg[2]
+    average(hyper, (x, y) -> p^x * (1-p)^(1-x) * q^y * (1-q)^(1-y))
+end
+heatmap([
+  f'([p, q]/100)' * [1, 1] >= 0
+  for p in 0:(1/39):1, q in 0:(1/39):1
+])
 
 
