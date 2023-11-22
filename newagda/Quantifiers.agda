@@ -17,7 +17,12 @@ open import Function using (_∘_)
     → B M
 ∀-elim L M = L M
 
-∀-distrib-× : ∀ {A : Set} {B C : A → Set} →
-    (∀ (x : A) → B x × C x) ≃ (∀ (x : A) → B x) × (∀ (x : A) → C x)
-∀-distrib-× 
+postulate
+    ∀-distrib-× : ∀ {A : Set} {B C : A → Set} →
+        (∀ (x : A) → B x × C x) ≃ (∀ (x : A) → B x) × (∀ (x : A) → C x)
+
+postulate
+    ⊎∀-implies-∀⊎ : ∀ {A : Set} {B C : A → Set} →
+        (∀ (x : A) → B x) ⊎ (∀ (x : A) → C x) → ∀ (x : A) → B x ⊎ C x
+
 
