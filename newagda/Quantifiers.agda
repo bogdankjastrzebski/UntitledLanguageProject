@@ -26,3 +26,31 @@ postulate
         (∀ (x : A) → B x) ⊎ (∀ (x : A) → C x) → ∀ (x : A) → B x ⊎ C x
 
 
+
+data Σ (A : Set) (B : A → Set) : Set where
+    ⟨_,_⟩ : (x : A) → B x → Σ A B
+
+Σ-syntax = Σ
+infix 2 Σ-syntax
+syntax Σ-syntax A (λ x → Bx) = Σ[ x ∈ A ] Bx
+
+∃ : ∀ {A : Set} (B : A → Set) → Set
+∃ {A} B = Σ A B
+
+∃-syntax = ∃
+syntax ∃-syntax (λ x → B) = ∃[ x ] B
+
+∃-elim : ∀ {A : Set} {B : A → Set} {C : Set}
+    → (∀ x → B x → C)
+    → ∃[ x ] B x
+    → C
+∃-elim f ⟨ x , y ⟩ = f x y
+
+
+
+
+
+
+
+
+
