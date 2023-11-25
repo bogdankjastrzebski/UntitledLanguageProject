@@ -9,7 +9,5 @@ let fib(n)
     d.while n > 0
         a, b = b, a + b
     return Integer(d.b)
-        
 
-# What is programming? What should we do?
 
