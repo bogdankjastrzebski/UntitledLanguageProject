@@ -1,5 +1,4 @@
 
-
 abstract type __AbstractLambda__ end
 abstract type __AbstractOperand__ <: __AbstractLambda__ end
 abstract type __AbstractOperation__ <: __AbstractLambda__ end
