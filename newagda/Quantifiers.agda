@@ -1,6 +1,5 @@
 module Quantifiers where
 
-
 import Relation.Binary.PropositionalEquality as Eq
 open Eq using (_≡_; refl)
 open import Data.Nat using (ℕ; zero; suc; _+_; _*_)
@@ -25,8 +24,6 @@ postulate
     ⊎∀-implies-∀⊎ : ∀ {A : Set} {B C : A → Set} →
         (∀ (x : A) → B x) ⊎ (∀ (x : A) → C x) → ∀ (x : A) → B x ⊎ C x
 
-
-
 data Σ (A : Set) (B : A → Set) : Set where
     ⟨_,_⟩ : (x : A) → B x → Σ A B
 
@@ -46,11 +43,4 @@ syntax ∃-syntax (λ x → B) = ∃[ x ] B
     → C
 ∃-elim f ⟨ x , y ⟩ = f x y
 
-
-
-
-
-
-
-
-
+-- New parg
