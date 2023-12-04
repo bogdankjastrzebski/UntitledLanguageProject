@@ -1,13 +1,14 @@
 
-# Processors
-using Device
+# A minimal language with decidable allocation.
 
-let fib(n)
-    d := Device()
-    d.set a : i32 = 1
-    d.set b : i32 = 0
-    d.while n > 0
+fib(x: i32): i32
+    a, b := 1, 0
+    for _ 0..n
         a, b = b, a + b
-    return Integer(d.b)
+    return b
 
+fib: i32 -> i32
+fib 0 = 0
+fib 1 = 1
+fib (1+ (1+ n)) = fib (1+ n) + fib n
 
