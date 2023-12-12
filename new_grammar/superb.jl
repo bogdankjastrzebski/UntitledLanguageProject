@@ -14,6 +14,5 @@ fib (1+ (1+ n)) = fib (1+ n) + fib n
 
 fib(n: i32): i32 = n if n < 2 else fib(n-1) + fib(n-2)
 
-i32: type
 
 
