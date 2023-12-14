@@ -41,9 +41,21 @@ suc  := λn.λf.λx.f(nx)
 #     calling, it's impossible.
 #   * Do we need reflexivity?
 #   * What's the point of lambda calculus then anyway?
+#
+#
+# If we write with a dependantly typed language, we
+# know that our function termiates, provided that 
+# the type inference terminates. Type inferenence / checking
+# is only a computation:
 
+rule-0: zero ↦ ℕ
+rule-n: suc ℕ ↦ ℕ
 
+_+_ : ℕ → ℕ → ℕ
+zero + n = n
+suc m + n = m + suc n
 
-
+zero + n by definition just gives us n
+suc m + n = suc ℕ + ℕ = ℕ + suc ℕ
 
 
