@@ -59,3 +59,5 @@ zero + n by definition just gives us n
 suc m + n = suc ℕ + ℕ = ℕ + suc ℕ
 
 
+# Ok, but on the other hand, how to emulate processor in this language?
+
