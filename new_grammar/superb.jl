@@ -61,3 +61,7 @@ suc m + n = suc ℕ + ℕ = ℕ + suc ℕ
 
 # Ok, but on the other hand, how to emulate processor in this language?
 
+function fib: ℕ → ℕ
+    zero        | zero
+    suc zero    | suc zero
+    suc (suc n) | fib(n)
