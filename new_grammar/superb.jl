@@ -65,3 +65,9 @@ function fib: ℕ → ℕ
     zero        | zero
     suc zero    | suc zero
     suc (suc n) | fib(n)
+
+The language should have dual system of:
+* writing c-style functions
+* being able to represent them with functional code.
+
+
