@@ -59,3 +59,20 @@ fun(arg) : typeB
 fun(arg : typeA) : typeB 
     ...
 
+# we usually make the function constant:
+const fun(arg)
+    ...
+
+data ⊥ : Set where
+
+ex-falso-quodlibet : {x : Set} → ⊥ → x
+ex-falso-quodlibet ()
+
+data Dec (A : Set) : Set where
+    yes : A -> Dec A
+    no  : ¬ A -> Dec A
+
+thm : Dec A -> ((A -> F) -> F) -> A
+thm (yes a) ¬¬a = a
+thm (no ¬a) ¬¬a = ex-falso-quodlibet (¬¬a ¬a)  
+
