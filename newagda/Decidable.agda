@@ -1,7 +1,7 @@
 module Decidable where
 
 open import Data.Nat
-open import Data.Fin
+--open import Data.Fin hiding (_≤_)
 open import Data.List
 open import Agda.Builtin.Equality
 
@@ -24,12 +24,8 @@ ex-falso-quidlibet ()
 
 -- simple theorem proved by ad absurdum
 
-
-record Prime : Set where
-    field
-        value : ℕ
-        is-prime : {n : Fin value}
-            → (suc zero) ≤ ((suc (suc n)) mod n)
+is-prime? : (n : ℕ) → Dec ( (m : ℕ) → ((suc (suc (suc m))) ≤ n) → ((suc zero) ≤ n mod (suc (suc m))))
+is-prime? n = ?
 
 
 
