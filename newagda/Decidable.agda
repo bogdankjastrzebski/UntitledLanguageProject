@@ -86,10 +86,10 @@ mod_1+_ : ℕ → ℕ → ℕ
 mod m 1+ n = mod-helper 0 n m n
 
 is-divisible : (m n : ℕ) → Dec (0 ≡ mod m 1+ n)
-is-divisible m n = case (mod m 1+ n) m n where
-    case : (o : ℕ) → (m n : ℕ) → Dec (0 ≡ mod m 1+ n)
-    case zero    m n = yes refl
-    case (suc o) m n = no ¬z≡s
+is-divisible m n = case (mod m 1+ n) where
+    case : (o : ℕ) → Dec (0 ≡ o)
+    case zero    = yes refl
+    case (suc o) = no ¬z≡s
 --is-divisible m n with mod m 1+ n
 --is-divisible m n    | zero  = yes refl
 --is-divisible m n    | suc o = no ¬z≡s
