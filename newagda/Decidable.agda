@@ -19,12 +19,40 @@ data Dec (A : Set) : Set where
     yes : A   → Dec A
     no  : ¬ A → Dec A
 
-ex-falso-quidlibet : {A : Set} → ⊥ → A
-ex-falso-quidlibet ()
+ex-falso-quodlibet : {A : Set} → ⊥ → A
+ex-falso-quodlibet ()
 
 ¬¬-elimination : {A : Set} → Dec A → ¬ (¬ A) → A
 ¬¬-elimination (yes A) ¬¬A = A
-¬¬-elimination (no nA) nnA = ex-falso-quidlibet (nnA nA)
+¬¬-elimination (no nA) nnA = ex-falso-quodlibet (nnA nA)
+
+_<_ : ℕ → ℕ → Set
+n < m = suc n ≤ m
+
+≤-refl : {n : ℕ} → n ≤ n
+≤-refl {zero} = _≤_.z≤n
+≤-refl {suc n} = _≤_.s≤s ≤-refl
+
+≤-trans : {x y z : ℕ} → x ≤ y → y ≤ z → x ≤ z
+≤-trans _≤_.z≤n y≤z = _≤_.z≤n
+≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
+
+ℕ-disorder : {n m : ℕ} → n < m → m ≤ n → ⊥
+ℕ-disorder (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = ℕ-disorder m≤n₁ m≤n
+
+data Compare (n m : ℕ) : Set where
+    less : n ≤ m → Compare n m
+    more : m ≤ n → Compare n m
+
+compare : (n m : ℕ) → (Compare n m)
+compare zero m = less _≤_.z≤n
+compare (suc n) zero = more _≤_.z≤n
+compare (suc n) (suc m) with compare n m
+...| less n≤m = less (_≤_.s≤s n≤m)
+...| more m≤n = more (_≤_.s≤s m≤n)
+
+
+
 
 -- simple theorem proved by ad absurdum
 
@@ -74,8 +102,6 @@ suc m is≡  zero = no (¬≡-comm ¬z≡s)
 suc m is≡ suc n with (m is≡ n)
 suc m is≡ suc n    | yes m≡n = yes (s≡s m≡n)
 suc m is≡ suc n    | no ¬m≡n = no (¬≡-suc ¬m≡n)
-
-    
 
 mod-helper : ℕ → ℕ → ℕ → ℕ → ℕ
 mod-helper k m  zero    j      = k
