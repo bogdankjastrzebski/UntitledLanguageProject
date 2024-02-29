@@ -69,10 +69,30 @@ ex-falso-quodlibet : {x : Set} → ⊥ → x
 ex-falso-quodlibet ()
 
 data Dec (A : Set) : Set where
-    yes : A -> Dec A
+    yes :   A -> Dec A
     no  : ¬ A -> Dec A
 
 thm : Dec A -> ((A -> F) -> F) -> A
 thm (yes a) ¬¬a = a
-thm (no ¬a) ¬¬a = ex-falso-quodlibet (¬¬a ¬a)  
+thm (no ¬a) ¬¬a = ex-falso-quodlibet (¬¬a ¬a) 
 
+In our type system:
+
+set := new_set()
+N := subset(set)
+zero : N     = f -> x -> x
+suc : N -> N = n -> f -> x -> f(n(x))
+
+
+zero(f)(x) := x
+suc(n)(f)(x) := f(n(x))
+
+Set = new_universum()
+N <: Set
+zero : N
+suc  : N -> N
+
+
+hello(x)
+  select * from df
+  where col > 3
