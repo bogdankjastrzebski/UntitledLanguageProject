@@ -93,6 +93,25 @@ zero : N
 suc  : N -> N
 
 
-hello(x)
+hello(x):
   select * from df
   where col > 3
+
+df:
+  select sum(*) from data
+  where col > 3 and loc < 2
+  group by categorical
+
+fib(n):
+    a, b := 1, 0
+    for _ in 0..n 
+    	a, b = b, a + b
+    return b
+
+name : type = value
+
+fib(n: Natural): Natural
+  case n
+    0          0
+    1          1
+    1+(1+(n))  fib(n + 1) + fib(n) 
