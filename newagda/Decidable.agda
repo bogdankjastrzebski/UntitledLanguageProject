@@ -34,11 +34,13 @@ n < m = suc n ≤ m
 ≤-refl {suc n} = _≤_.s≤s ≤-refl
 
 ≤-trans : {x y z : ℕ} → x ≤ y → y ≤ z → x ≤ z
-≤-trans _≤_.z≤n y≤z = _≤_.z≤n
-≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
+≤-trans x≤y y≤z = ?
+--≤-trans _≤_.z≤n y≤z = _≤_.z≤n
+--≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
 
 ℕ-disorder : {n m : ℕ} → n < m → m ≤ n → ⊥
 ℕ-disorder (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = ℕ-disorder m≤n₁ m≤n
+
 
 data Compare (n m : ℕ) : Set where
     less : n ≤ m → Compare n m
