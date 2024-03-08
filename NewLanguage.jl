@@ -115,3 +115,28 @@ fib(n: Natural): Natural
     0          0
     1          1
     1+(1+(n))  fib(n + 1) + fib(n) 
+
+
+# Reversed Notation
+
+fib : ℕ → ℕ
+0 fib = 0
+0 +1 fib = 1
+n +1 +1 fib = n +1 fib + n fib
+
+
+fib : ℕ → ℕ
+(0)fib = 0
+(0 +1)fib = 1
+(n +1 +1)fib = (n +1)fib + (n)fib
+
+fib : ℕ → ℕ
+0.fib = 0
+0.+1.fib = 1
+n.+1.+1.fib = n.+1.fib + n.fib
+
+
+płot ("biało" pomaluj) (pędzelkiem szlaczki_zrób)
+
+g.f = g.g.¬
+
