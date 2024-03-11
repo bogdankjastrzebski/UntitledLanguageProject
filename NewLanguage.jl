@@ -136,7 +136,17 @@ fib : ℕ → ℕ
 n.+1.+1.fib = n.+1.fib + n.fib
 
 
-płot ("biało" pomaluj) (pędzelkiem szlaczki_zrób)
+płot.("biało" pomaluj).(pędzelkiem szlaczki_zrób)
 
 g.f = g.g.¬
+
+The typing will be optional!
+
+range(n: ℕ): Vec{Fin{n}, n}
+  fn _range(k):
+    0    = Vec{Fin{n}, 0}()
+    k +1 = push(_range(k), k)
+  return _range(k)
+      
+
 
