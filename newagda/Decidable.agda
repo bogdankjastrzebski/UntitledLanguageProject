@@ -34,13 +34,27 @@ n < m = suc n ≤ m
 ≤-refl {suc n} = _≤_.s≤s ≤-refl
 
 ≤-trans : {x y z : ℕ} → x ≤ y → y ≤ z → x ≤ z
-≤-trans x≤y y≤z = ?
+≤-trans _≤_.z≤n y≤z = _≤_.z≤n
+≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
+
+¬zero<zero : suc zero ≤ zero -> ⊥
+¬zero<zero ()
+
+¬s<s : (m n : ℕ) → ¬ (m < n) → ¬ (suc m < suc n)
+¬s<s m n ¬m<n (_≤_.s≤s m≤n) = ¬m<n m≤n
+
+¬n<n : (n : ℕ) -> n < n -> ⊥
+¬n<n (suc n) (_≤_.s≤s m) = ¬n<n n m
+
+peagonhole : (m n : ℕ) (n < m)
+             (f : Fin m → Fin n)
+           → ∃[k l] (k < l) ⊎ (f k ≡ f l) 
+
 --≤-trans _≤_.z≤n y≤z = _≤_.z≤n
 --≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
 
 ℕ-disorder : {n m : ℕ} → n < m → m ≤ n → ⊥
 ℕ-disorder (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = ℕ-disorder m≤n₁ m≤n
-
 
 data Compare (n m : ℕ) : Set where
     less : n ≤ m → Compare n m
@@ -52,8 +66,6 @@ compare (suc n) zero = more _≤_.z≤n
 compare (suc n) (suc m) with compare n m
 ...| less n≤m = less (_≤_.s≤s n≤m)
 ...| more m≤n = more (_≤_.s≤s m≤n)
-
-
 
 
 -- simple theorem proved by ad absurdum
