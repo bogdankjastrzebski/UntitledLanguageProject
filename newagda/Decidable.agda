@@ -2,11 +2,14 @@ module Decidable where
 
 open import Data.Nat using (ℕ; _+_; zero; suc; _≤_)
 open import Data.Sum using (_⊎_)
+open import Data.Product using (_×_; proj₁; proj₂) renaming (_,_ to ⟨_,_⟩)
+open import Data.Product using (Σ; _,_; ∃; Σ-syntax; ∃-syntax)
 --open import Data.Maybe
---open import Data.Fin using (Fin; zero; suc)
+open import Data.Fin using (Fin; toℕ)
 --open import Data.List using (List; _∷_; []; tabulate)
 --open import Data.Vec using (Vec; []; _∷_; foldr)
 --open import Function using (const; _∘_)
+
 open import Agda.Builtin.Equality
 
 data ⊥ : Set where
@@ -43,18 +46,35 @@ n < m = suc n ≤ m
 ¬s<s : (m n : ℕ) → ¬ (m < n) → ¬ (suc m < suc n)
 ¬s<s m n ¬m<n (_≤_.s≤s m≤n) = ¬m<n m≤n
 
-¬n<n : (n : ℕ) -> n < n -> ⊥
-¬n<n (suc n) (_≤_.s≤s m) = ¬n<n n m
+¬sn≤n : (n : ℕ) → ¬ (suc n ≤ n) 
+¬sn≤n (suc n) (_≤_.s≤s snn) = ¬sn≤n n snn
 
-peagonhole : (m n : ℕ) (n < m)
-             (f : Fin m → Fin n)
-           → ∃[k l] (k < l) ⊎ (f k ≡ f l) 
+¬n<n : (n : ℕ) → ¬ (n < n)
+¬n<n (suc n) (_≤_.s≤s n<n) = ¬n<n n n<n
+
+
+ph-dec0 : (m n : ℕ)
+  → (f : Fin n → Fin m)
+  → (k l : Fin n)
+  → (toℕ k < toℕ l)
+  → Dec (((f k ≡ f l) × (toℕ k < toℕ l)))
+ph-dec0 m n f k l k<l = {! -c!} 
+
+ph-dec1 : (m n : ℕ) → (f : Fin n → Fin m) → (k : Fin n) → Dec (∃[ l ] ((f k ≡ f l) ⊎ (toℕ k < toℕ l)))
+ph-dec1 m n f k = {! !}
+
+ph-dec : (m n : ℕ) → (f : Fin n → Fin m) →  Dec (∃[ k ] ∃[ l ] ((f k ≡ f l) ⊎ (toℕ k < toℕ l)))
+ph-dec m n f = {!!}
+
+--peagonhole : (m n : ℕ) (n < m)
+--            (f : Fin m → Fin n)
+--          → ∃[k l] (k < l) ⊎ (f k ≡ f l) 
 
 --≤-trans _≤_.z≤n y≤z = _≤_.z≤n
 --≤-trans (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = _≤_.s≤s (≤-trans m≤n₁ m≤n)
 
-ℕ-disorder : {n m : ℕ} → n < m → m ≤ n → ⊥
-ℕ-disorder (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = ℕ-disorder m≤n₁ m≤n
+--ℕ-disorder : {n m : ℕ} → n < m → m ≤ n → ⊥
+--ℕ-disorder (_≤_.s≤s m≤n₁) (_≤_.s≤s m≤n) = ℕ-disorder m≤n₁ m≤n
 
 data Compare (n m : ℕ) : Set where
     less : n ≤ m → Compare n m
