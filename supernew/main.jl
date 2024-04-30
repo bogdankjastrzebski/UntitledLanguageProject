@@ -20,11 +20,32 @@ y ~ N(0, 1)
 
 a+b := a + b
 
+ℕ := Natural
+
 const fib(n : ℕ) : ℕ
     a b := 1 0
     for _ in 0..n
         a b = b a + b
     return b
 
+if x < 2
+    print(4)
+  x < 4
+    print(3)
+  else
+    print(5)
 
-    
+match x
+  x < 2
+    print(4)
+  x < 4
+    print(5)
+  else
+    print(6)
+
+
+f(x) := 2 * x + 1
+
+g := Derivative(f)(x)
+
+,.
