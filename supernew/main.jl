@@ -28,6 +28,21 @@ const fib(n : ℕ) : ℕ
         a b = b a + b
     return b
 
+fib(n: ℕ): ℕ
+  rec(rec, a, b, n) := n == 0 ? b : rec(rec, b, a + b, n - 1)
+  return rec(rec, 1, 0, n) # to będzie nieprawidłowy typ
+
+fib(n: ℕ): ℕ
+  rec: ℕ × ℕ × ℕ → ℕ
+    cases
+      (a, b,       0) := b
+      (a, b, (n + 1)) := rec(b, a + b, n)
+  return rec(1, 0, n)
+
+a := 3
+a = 2
+
+
 if x < 2
     print(4)
   x < 4
@@ -48,4 +63,9 @@ f(x) := 2 * x + 1
 
 g := Derivative(f)(x)
 
-,.
+
+
+
+
+
+
