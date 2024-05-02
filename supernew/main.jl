@@ -28,9 +28,11 @@ const fib(n : ℕ) : ℕ
         a b = b a + b
     return b
 
+
 fib(n: ℕ): ℕ
   rec(rec, a, b, n) := n == 0 ? b : rec(rec, b, a + b, n - 1)
   return rec(rec, 1, 0, n) # to będzie nieprawidłowy typ
+
 
 fib(n: ℕ): ℕ
   rec: ℕ × ℕ × ℕ → ℕ
@@ -38,6 +40,21 @@ fib(n: ℕ): ℕ
       (a, b,       0) := b
       (a, b, (n + 1)) := rec(b, a + b, n)
   return rec(1, 0, n)
+
+
+dataset:
+  SQL select * from download("https://www.something.com/mydata/")
+      where something
+
+
+dataframe:
+  SQL select * from dataset
+      where something
+
+
+this_is_long_name:
+    formula + is + also + long
+
 
 a := 3
 a = 2
@@ -50,6 +67,7 @@ if x < 2
   else
     print(5)
 
+
 match x
   x < 2
     print(4)
@@ -61,11 +79,5 @@ match x
 
 f(x) := 2 * x + 1
 
+
 g := Derivative(f)(x)
-
-
-
-
-
-
-
