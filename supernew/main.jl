@@ -55,7 +55,6 @@ dataframe:
 this_is_long_name:
     formula + is + also + long
 
-
 a := 3
 a = 2
 
@@ -81,3 +80,24 @@ f(x) := 2 * x + 1
 
 
 g := Derivative(f)(x)
+
+# Problem
+
+fib(n):
+    ...
+
+fib(n)
+    ... 
+
+name
+    ... # macro or assignement?
+
+fib(n)
+    something # redefinition
+
+dataset
+  sql
+    select * from dataframe
+    where something and something
+
+
