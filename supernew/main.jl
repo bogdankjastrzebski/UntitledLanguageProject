@@ -98,6 +98,4 @@ fib(n)
 dataset
   sql
     select * from dataframe
-    where something and something
-
-
+    where something and something  
