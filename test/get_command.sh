@@ -26,11 +26,11 @@ NC='\033[0m' # No Color
 #done
 
 # echo "daisy"
-#echo "⮟"
+# echo "⮟"
 # echo "⮮daisy"
-echo -e "\n${GREEN}⮮daisy${NC}"
-#echo "⯆daisy"
-#echo "⮦daisy"
+# echo -e "\n${GREEN}⮮daisy${NC}" > /dev/tty 
+# echo "⯆daisy"
+# echo "⮦daisy"
 
 stream_name=$1
 arrow_sign=$(printf "\u1b")
@@ -39,29 +39,30 @@ line=0
 position=0
 while true; do
     read -s -r -N1 char
+    
     if [ "$char" = $'\x04' ]; then
         for line in "${lines[@]}"; do
-            echo $line
+            echo "$line"
         done
         break
     elif [ "$char" = $'\x7f' ] || [ "$char" = $'\x08' ]; then
 		if [ $position -ne 0 ]; then
-			tput sc
+			tput sc > /dev/tty 
 		
 			second_part="${lines[line]:position}"
 			position=`expr $position - 1`
 			first_part="${lines[line]:0:position}"
 			lines[line]=$first_part$second_part
-			echo -n $'\r'
-			tput el
-			echo -n "${lines[line]}"
+			echo -n $'\r' > /dev/tty 
+			tput el > /dev/tty 
+			echo -n "${lines[line]}" > /dev/tty 
 			
-			tput rc
-			tput cub1 
+			tput rc > /dev/tty 
+			tput cub1 > /dev/tty 
 
 
 		elif [ $line -ne 0 ]; then
-			tput sc
+			tput sc > /dev/tty 
 			
 			prev=`expr $line - 1`
 			
@@ -73,37 +74,37 @@ while true; do
 			lines=("${lines[@]}")
 			
 			line=`expr $line - 1`
-			tput cub $position
-			tput cuu1
+			tput cub $position > /dev/tty 
+			tput cuu1 > /dev/tty 
 	
 			for l in "${lines[@]:line}"; do 
-				tput el
-				echo -n "$l"
-				tput cud1
+				tput el > /dev/tty 
+				echo -n "$l" > /dev/tty 
+				tput cud1 > /dev/tty 
 			done
-			# echo -n $'\r'
-			tput el
+			# echo -n $'\r' > /dev/tty 
+			tput el > /dev/tty 
 			
-			tput rc
-			tput cuu1
+			tput rc > /dev/tty 
+			tput cuu1 > /dev/tty 
 		        if [ $position -gt 0 ]; then
-				tput cuf $position
+				tput cuf $position > /dev/tty 
 			fi	
 		fi
 	
 	elif [ "$char" = $'\x12' ]; then
     # 	clear
-    # 	echo "Your command: "
+    # 	echo "Your command: " > /dev/tty 
     # 	echo
     # 	for l in "${lines[@]}"; do
-	#			echo "$l"
+	#			echo "$l" > /dev/tty 
     #        	done
-    #       	echo
+    #       	echo > /dev/tty 
 	#	 	echo "End of your command."
 	#		exit
 			
 		for l in "${lines[@]}"; do
-			echo "$l" >> $stream_name
+			echo "$l" >> $stream_name > /dev/tty 
 		done	
 		exit
 
@@ -120,14 +121,14 @@ while true; do
 			
 		lines=("${lines[@]:0:line}" "$second_part" "${lines[@]:line}")
 		for (( i=`expr $line - 1`; i<"${#lines[@]}"; i++ )); do
-       	               	echo -n $'\r'
-			tput el 
-			echo -n "${lines[i]}"
-			tput cud1 
+       	               	echo -n $'\r' > /dev/tty 
+			tput el > /dev/tty 
+			echo -n "${lines[i]}" > /dev/tty 
+			tput cud1 > /dev/tty 
                 done
 		moveup=`expr "${#lines[@]}" - $line`
 		if [ $moveup -gt 0 ]; then
-			tput cuu $moveup
+			tput cuu $moveup > /dev/tty 
 		fi
 	
 	elif [[ $char == $arrow_sign ]]; then
@@ -139,10 +140,10 @@ while true; do
 					number_of_chars="${#lines[line]}"
 					moveleft=$(( $position > $number_of_chars ? `expr $position - $number_of_chars` : 0 ))
 					
-					tput cuu1
+					tput cuu1 > /dev/tty 
 					if [ $moveleft -gt 0 ]; then
 						position=`expr $position - $moveleft`
-						tput cub $moveleft
+						tput cub $moveleft > /dev/tty 
 					fi
 				fi;;
             '[B') 
@@ -150,33 +151,33 @@ while true; do
                     line=`expr $line + 1`
                     number_of_chars="${#lines[line]}"
                     position=$(( $position > $number_of_chars ? $number_of_chars : $position ))
-					tput cud1
+					tput cud1 > /dev/tty 
                     if [ $position -gt 0 ]; then
-                        tput cuf $position 
+                        tput cuf $position > /dev/tty 
                     fi
                 fi;;
 			'[D')
                 if [ $position -gt 0 ]; then
                     position=`expr $position - 1`
-					tput cub1
+					tput cub1 > /dev/tty 
 				fi;;
             '[C')
 				if [ $position -lt "${#lines[line]}" ]; then
                     position=`expr $position + 1`
-                    tput cuf1
+                    tput cuf1 > /dev/tty 
                 fi;;
             esac
 	else	
-		tput sc
+		tput sc > /dev/tty 
 		first_part="${lines[line]:0:position}"
 		second_part="${lines[line]:position}"
        	position=`expr $position + 1`
        	lines[line]=$first_part$char$second_part
-        tput el
-        echo -n $'\r'
-        echo -n "${lines[line]}"
-		tput rc
-		tput cuf1
+        tput el > /dev/tty 
+        echo -n $'\r' > /dev/tty 
+        echo -n "${lines[line]}" > /dev/tty 
+		tput rc > /dev/tty 
+		tput cuf1 > /dev/tty 
 	fi
 done
 
