@@ -38,8 +38,13 @@ lines=("")
 line=0
 position=0
 while true; do
-	read -s -r -N1 char
-	if [ "$char" = $'\x7f' ] || [ "$char" = $'\x08' ]; then
+    read -s -r -N1 char
+    if [ "$char" = $'\x04' ]; then
+        for line in "${lines[@]}"; do
+            echo $line
+        done
+        break
+    elif [ "$char" = $'\x7f' ] || [ "$char" = $'\x08' ]; then
 		if [ $position -ne 0 ]; then
 			tput sc
 		
@@ -87,13 +92,13 @@ while true; do
 		fi
 	
 	elif [ "$char" = $'\x12' ]; then
-       	        # 	clear
-       	        # 	echo "Your command: "
-       	        # 	echo
-       	        # 	for l in "${lines[@]}"; do
+    # 	clear
+    # 	echo "Your command: "
+    # 	echo
+    # 	for l in "${lines[@]}"; do
 	#			echo "$l"
-       	 #        	done
-       	  #       	echo
+    #        	done
+    #       	echo
 	#	 	echo "End of your command."
 	#		exit
 			
@@ -126,10 +131,10 @@ while true; do
 		fi
 	
 	elif [[ $char == $arrow_sign ]]; then
-          	read -rsn2 mode 
-  	        case $mode in
-                  	'[A')
-				if [ $line -gt 0 ]; then
+        read -rsn2 mode 
+  	    case $mode in
+            '[A')
+                if [ $line -gt 0 ]; then
 					line=`expr $line - 1`
 					number_of_chars="${#lines[line]}"
 					moveleft=$(( $position > $number_of_chars ? `expr $position - $number_of_chars` : 0 ))
@@ -140,44 +145,42 @@ while true; do
 						tput cub $moveleft
 					fi
 				fi;;
-                      	'[B') 
+            '[B') 
 				if [ $line -lt `expr "${#lines[@]}" - 1` ]; then
-                               		line=`expr $line + 1`
-                                       	number_of_chars="${#lines[line]}"
-                                       	position=$(( $position > $number_of_chars ? $number_of_chars : $position ))
+                    line=`expr $line + 1`
+                    number_of_chars="${#lines[line]}"
+                    position=$(( $position > $number_of_chars ? $number_of_chars : $position ))
 					tput cud1
-                               		if [ $position -gt 0 ]; then
-                                               	tput cuf $position 
-                                       	fi
-                               	fi;;
+                    if [ $position -gt 0 ]; then
+                        tput cuf $position 
+                    fi
+                fi;;
 			'[D')
-				if [ $position -gt 0 ]; then
-					position=`expr $position - 1`
+                if [ $position -gt 0 ]; then
+                    position=`expr $position - 1`
 					tput cub1
 				fi;;
-                       	'[C')
+            '[C')
 				if [ $position -lt "${#lines[line]}" ]; then
-					position=`expr $position + 1`
-		        		tput cuf1
-				fi;;
-               	esac
-		
+                    position=`expr $position + 1`
+                    tput cuf1
+                fi;;
+            esac
 	else	
 		tput sc
 		first_part="${lines[line]:0:position}"
 		second_part="${lines[line]:position}"
-       	 	position=`expr $position + 1`
-       	 	lines[line]=$first_part$char$second_part
-               	tput el
-               	echo -n $'\r'
-               	echo -n "${lines[line]}"
+       	position=`expr $position + 1`
+       	lines[line]=$first_part$char$second_part
+        tput el
+        echo -n $'\r'
+        echo -n "${lines[line]}"
 		tput rc
 		tput cuf1
 	fi
 done
 
+# set! x 3
 
-set! x 3
-
-for i in 0..n
-   print(3)
+# for i in 0..n
+#     print(3)
