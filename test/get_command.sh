@@ -38,13 +38,35 @@ lines=("")
 line=0
 position=0
 while true; do
-    read -s -r -N1 char
-    
+    read -s -r -N1 char 
+    # printf "%d" "'$char'" > /dev/tty
     if [ "$char" = $'\x04' ]; then
         for line in "${lines[@]}"; do
             echo "$line"
         done
         break
+    elif [ "$char" = $'\x09' ]; then
+        remainder=$(expr $position % 4)     
+        remainder=$(expr 4 - $remainder)
+        # if [ "$remainder" -eq 0 ]; then
+        #    remainder=4
+        # fi
+        stride=$(printf "%*s" "$remainder" "")
+
+        tput sc > /dev/tty 
+		first_part="${lines[line]:0:position}"
+		second_part="${lines[line]:position}"
+       	position=`expr $position + $remainder`
+       	lines[line]="$first_part$stride$second_part"
+        tput el > /dev/tty 
+        echo -n $'\r' > /dev/tty 
+        echo -n "${lines[line]}" > /dev/tty 
+		tput rc > /dev/tty 
+
+        for (( i=0; i<$remainder; i++ )); do
+		    tput cuf1 > /dev/tty 
+        done
+
     elif [ "$char" = $'\x7f' ] || [ "$char" = $'\x08' ]; then
 		if [ $position -ne 0 ]; then
 			tput sc > /dev/tty 
@@ -65,9 +87,9 @@ while true; do
 			tput sc > /dev/tty 
 			
 			prev=`expr $line - 1`
-			
+
 			position="${#lines[prev]}"
-			
+
 			lines[prev]="${lines[prev]}""${lines[line]}"
 			
 			unset 'lines[line]'
@@ -104,7 +126,7 @@ while true; do
 	#		exit
 			
 		for l in "${lines[@]}"; do
-			echo "$l" >> $stream_name > /dev/tty 
+			echo "$l" >> $stream_name
 		done	
 		exit
 
