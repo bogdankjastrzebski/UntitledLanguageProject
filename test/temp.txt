@@ -1,16 +1,3 @@
-asdf
-Hello!
-How are you?
-line1\nline2
-line1
-line2
-line1;line2
-line1;    line2
-line1;    line2
-line1;    line2
-Hello
-Hello\nWorld!Hello
-A
-BA
-BA
-B
+
+[0;32m⮮daisy[0m
+7[Ka8[C7[Kal8[C7[Kalp8[C7[Kalph8[C7[Kalpha8[C
