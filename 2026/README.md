@@ -7,8 +7,6 @@ Unlike standard compilers, MetaLisp separates logic into two layers:
 1. **Primal Types (Data):** Simple memory layouts (`Product`, `Sum`, `Int`, `Float`) tagged with user-land labels.
 2. **Dual Types (Predicates):** Chronological dispatch functions that act as predicates. 
 
-
-
 ## Core Architectural Innovations
 
 ### 1. Chronological Multiple Dispatch
